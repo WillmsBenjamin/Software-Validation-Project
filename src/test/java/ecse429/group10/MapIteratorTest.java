@@ -140,7 +140,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void failGetKeyOneMap(@All("one element") IterableMap map)
+	public void shouldGetKeyOneMap(@All("one element") IterableMap map)
 	{
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
@@ -154,7 +154,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void failGetKeyFilledMap(@All("filled") IterableMap map)
+	public void shouldGetKeyFilledMap(@All("filled") IterableMap map)
 	{
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
@@ -182,7 +182,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void failGetValueOneMap(@All("one element") IterableMap map)
+	public void shouldGetValueOneMap(@All("one element") IterableMap map)
 	{
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
@@ -196,12 +196,68 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void failGetValueFilledMap(@All("filled") IterableMap map)
+	public void shouldGetValueFilledMap(@All("filled") IterableMap map)
 	{
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
 		assertEquals(1 , iterator.getValue());
 	}
+
+    /**
+     *
+     * Test that Test that getKey() returns an incorrect key when given an inappropriate value on a map of size 1
+     * @param map
+     *
+     * */
+    @Test(expected = AssertionError.class)
+    public void failGetKeyOneMap(@All("one element") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals("FOUR" , iterator.getKey());
+    }
+
+    /**
+     *
+     * Test that Test that getKey() returns an incorrect key when given an inappropriate value on a map of size 2
+     * @param map
+     *
+     * */
+    @Test(expected = AssertionError.class)
+    public void failGetKeyFilledMap(@All("filled") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals("FOUR" , iterator.getKey());
+    }
+
+    /**
+     *
+     * Test that Test that getValue() returns returns an incorrect value when given an inappropriate key on a map of size 1
+     * @param map
+     *
+     * */
+    @Test(expected = AssertionError.class)
+    public void failGetValueOneMap(@All("one element") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals(4 , iterator.getValue());
+    }
+
+    /**
+     *
+     * Test that Test that getValue() returns returns an incorrect value when given an inappropriate key on a map of size 2
+     * @param map
+     *
+     * */
+    @Test(expected = AssertionError.class)
+    public void failGetValueFilledMap(@All("filled") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals(4 , iterator.getValue());
+    }
 
 	/**
 	 *
