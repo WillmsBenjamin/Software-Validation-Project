@@ -129,6 +129,90 @@ public class MapIteratorTest {
 
     /**
      *
+     * Test that Test that getKey() returns an exception on an empty list
+     * @param map
+     *
+     * */
+    @Test(expected = NoSuchElementException.class)
+    public void failGetKeyEmptyMap(@All("empty") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals("ONE" , iterator.getKey());
+    }
+
+    /**
+     *
+     * Test that Test that getKey() returns the correct key in a map of size 1
+     * @param map
+     *
+     * */
+    @Test
+    public void failGetKeyOneMap(@All("one element") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals("ONE" , iterator.getKey());
+    }
+
+    /**
+     *
+     * Test that Test that getKey() returns the correct key in a map of size 2
+     * @param map
+     *
+     * */
+    @Test
+    public void failGetKeyFilledMap(@All("filled") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals("ONE" , iterator.getKey());
+    }
+
+    /**
+     *
+     * Test that Test that getValue() returns an exception on an empty list
+     * @param map
+     *
+     * */
+    @Test(expected = NoSuchElementException.class)
+    public void failGetValueEmptyMap(@All("empty") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals(1 , iterator.getValue());
+    }
+
+    /**
+     *
+     * Test that Test that getValue() returns the correct key in a map of size 1
+     * @param map
+     *
+     * */
+    @Test
+    public void failGetValueOneMap(@All("one element") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals(1 , iterator.getValue());
+    }
+
+    /**
+     *
+     * Test that Test that getValue() returns the correct key in a map of size 2
+     * @param map
+     *
+     * */
+    @Test
+    public void failGetValueFilledMap(@All("filled") IterableMap map)
+    {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertEquals(1 , iterator.getValue());
+    }
+
+    /**
+     *
      * Test that the next() method returns the next element in map of size 1
      * @param map
      *
@@ -216,5 +300,49 @@ public class MapIteratorTest {
     public void shouldReturnTrueHasNextFilled(@All("filled") IterableMap map) {
         MapIterator iterator = map.mapIterator();
         assertTrue(iterator.hasNext());
+    }
+
+    /**
+     *
+     * Test that calling remove() on an empty map throws an exception
+     * @param map
+     *
+     * */
+    @Test(expected = IllegalStateException.class)
+    public void failRemoveElementFromEmptyMap(@All("empty") IterableMap map) {
+        IterableMap copiedMap = cloner.deepClone(map);
+        MapIterator iterator = copiedMap.mapIterator();
+        iterator.remove();
+    }
+
+    /**
+     *
+     * Test that remove() removes an element from a map of size 1
+     * @param map
+     *
+     * */
+    @Test
+    public void shouldRemoveOneElement(@All("one element") IterableMap map) {
+        IterableMap copiedMap = cloner.deepClone(map);
+        MapIterator iterator = copiedMap.mapIterator();
+        iterator.next();
+        iterator.remove();
+        assertFalse(iterator.hasNext());
+    }
+
+    /**
+     *
+     * Test that Test that remove() removes an element from a map of size 2
+     * @param map
+     *
+     * */
+    @Test
+    public void shouldRemoveFilledElement(@All("filled") IterableMap map) {
+        IterableMap copiedMap = cloner.deepClone(map);
+        MapIterator iterator = copiedMap.mapIterator();
+        iterator.next();
+        iterator.remove();
+        iterator.next();
+        assertEquals("TWO" , iterator.getKey());
     }
 }
