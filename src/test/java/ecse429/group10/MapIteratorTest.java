@@ -96,21 +96,7 @@ public class MapIteratorTest {
      * */
     @Test(expected = NoSuchElementException.class)
     public void failAfterLastElementEmptyMap(@All("empty") IterableMap map) {
-        Iterator iterator = map.mapIterator();
-        iterator.next();
-    }
-
-    /**
-     *
-     * Test that there is no fourth element in map of size 3 by calling next() 4 times
-     * @param map
-     *
-     * */
-    @Test(expected = NoSuchElementException.class)
-    public void failAfterLastElementFilledMap(@All("filled") IterableMap map) {
-        Iterator iterator = map.mapIterator();
-        iterator.next();
-        iterator.next();
+        MapIterator iterator = map.mapIterator();
         iterator.next();
     }
 
@@ -122,9 +108,51 @@ public class MapIteratorTest {
      * */
     @Test(expected = NoSuchElementException.class)
     public void failAfterLastElementOnedMap(@All("one element") IterableMap map) {
-        Iterator iterator = map.mapIterator();
+        MapIterator iterator = map.mapIterator();
         iterator.next();
         iterator.next();
+    }
+
+    /**
+     *
+     * Test that there is no fourth element in map of size 2 by calling next() 3 times
+     * @param map
+     *
+     * */
+    @Test(expected = NoSuchElementException.class)
+    public void failAfterLastElementFilledMap(@All("filled") IterableMap map) {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+    }
+
+    /**
+     *
+     * Test that the next() method returns the next element in map of size 1
+     * @param map
+     *
+     * */
+    @Test
+    public void shouldReturnNextElementOneElementMap(@All("one element") IterableMap map) {
+        MapIterator iterator = map.mapIterator();
+        Object key = iterator.next();
+        assertEquals("ONE" , key);
+        assertEquals(1 , iterator.getValue());
+    }
+
+    /**
+     *
+     * Test that the next() method returns the next element in map of size 2
+     * @param map
+     *
+     * */
+    @Test
+    public void shouldReturnNextElementFilledMap(@All("filled") IterableMap map) {
+        MapIterator iterator = map.mapIterator();
+        Object key = iterator.next();
+        assertEquals("ONE" , key);
+        assertEquals(1 , iterator.getValue());
     }
 
     /**
@@ -135,51 +163,34 @@ public class MapIteratorTest {
      * */
     @Test
     public void shouldReturnFalseHasNextEmpty(@All("empty") IterableMap map) {
-        Iterator iterator = map.mapIterator();
+        MapIterator iterator = map.mapIterator();
         assertFalse(iterator.hasNext());
     }
 
     /**
      *
-     * Test that hasNext() returns true when called on a map of size 2
+     * Test that hasNext() returns false when called on last element of a map of size 1
      * @param map
      *
      * */
     @Test
-    public void shouldReturnTrueHasNextFilled(@All("filled") IterableMap map) {
-        Iterator iterator = map.mapIterator();
-        assertTrue(iterator.hasNext());
+    public void shouldReturnFalseHasNextOneElement(@All("one element") IterableMap map) {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        assertFalse(iterator.hasNext());
     }
 
     /**
      *
-     * Test that hasNext() returns true when called on the before last element on a map of size 2
+     * Test that hasNext() returns false when called on last element of a map of size 2
      * @param map
      *
      * */
     @Test
-    public void shouldReturnTrueHasNextFilledLast(@All("filled") IterableMap map) {
-        Iterator iterator = map.mapIterator();
-        for(int i = 0 ; i < map.size() - 1 ; i++)
-        {
-            iterator.next();
-        }
-        assertTrue(iterator.hasNext());
-    }
-
-    /**
-     *
-     * Test that hasNext() returns false when called on the last element on a map of size 2
-     * @param map
-     *
-     * */
-    @Test
-    public void shouldReturnFalseHasNextFilledLast(@All("filled") IterableMap map) {
-        Iterator iterator = map.mapIterator();
-        for(int i = 0 ; i < map.size() ; i++)
-        {
-            iterator.next();
-        }
+    public void shouldReturnFalseHasNextFilledElement(@All("filled") IterableMap map) {
+        MapIterator iterator = map.mapIterator();
+        iterator.next();
+        iterator.next();
         assertFalse(iterator.hasNext());
     }
 
@@ -191,21 +202,19 @@ public class MapIteratorTest {
      * */
     @Test
     public void shouldReturnTrueHasNextOneElement(@All("one element") IterableMap map) {
-        Iterator iterator = map.mapIterator();
+        MapIterator iterator = map.mapIterator();
         assertTrue(iterator.hasNext());
     }
 
     /**
      *
-     * Test that hasNext() returns false when called on the last element of a map of size 1
+     * Test that hasNext() returns true when called on a map of size 2
      * @param map
      *
      * */
     @Test
-    public void shouldReturnFalseHasNextOneElement(@All("one element") IterableMap map) {
-        Iterator iterator = map.mapIterator();
-        iterator.next();
-        assertFalse(iterator.hasNext());
+    public void shouldReturnTrueHasNextFilled(@All("filled") IterableMap map) {
+        MapIterator iterator = map.mapIterator();
+        assertTrue(iterator.hasNext());
     }
-
 }
