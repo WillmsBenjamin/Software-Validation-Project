@@ -58,19 +58,16 @@ public class MapIteratorTest {
                      {{
                         put("ONE" , 1);
                         put("TWO" , 2);
-                        put("THREE" , 3);
                      }},
                      new LinkedMap<String , Integer>()
                      {{
                          put("ONE" , 1);
                          put("TWO" , 2);
-                         put("THREE" , 3);
                      }},
                      new TreeBidiMap<String , Integer>()
                      {{
                          put("ONE" , 1);
                          put("TWO" , 2);
-                         put("THREE" , 3);
                      }});
 
              // initialize non-empty one element instances of maps
@@ -115,7 +112,6 @@ public class MapIteratorTest {
         iterator.next();
         iterator.next();
         iterator.next();
-        iterator.next();
     }
 
     /**
@@ -145,7 +141,7 @@ public class MapIteratorTest {
 
     /**
      *
-     * Test that hasNext() returns true when called on a map of size 3
+     * Test that hasNext() returns true when called on a map of size 2
      * @param map
      *
      * */
@@ -157,7 +153,7 @@ public class MapIteratorTest {
 
     /**
      *
-     * Test that hasNext() returns true when called on the before last element on a map of size 3
+     * Test that hasNext() returns true when called on the before last element on a map of size 2
      * @param map
      *
      * */
@@ -173,7 +169,7 @@ public class MapIteratorTest {
 
     /**
      *
-     * Test that hasNext() returns false when called on the last element on a map of size 3
+     * Test that hasNext() returns false when called on the last element on a map of size 2
      * @param map
      *
      * */
