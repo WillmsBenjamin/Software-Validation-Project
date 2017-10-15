@@ -35,7 +35,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Test for the MapIterator interface inside of the Apache commons collection
+ * Test for the OrderedMap interface inside of the Apache commons collection
  */
 
 @RunWith(JukitoRunner.class)
