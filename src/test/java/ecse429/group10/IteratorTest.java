@@ -65,7 +65,10 @@ public class IteratorTest {
                     new LoopingListIterator<>(Arrays.asList()),
                     new ArrayListIterator(new String[]{}),
                     new ObjectArrayIterator(new String[]{}),
-                    new UniqueFilterIterator<>(Arrays.asList().iterator()));
+                    new UniqueFilterIterator<>(Arrays.asList().iterator()),
+                    new IteratorChain<>(Arrays.asList().iterator()),
+                    new ReverseListIterator<>(Arrays.asList())
+                    );
         }
     }
 
