@@ -1,6 +1,5 @@
 package ecse429.group10;
 
-import com.rits.cloning.Cloner;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.IterableMap;
 import org.apache.commons.collections4.MapIterator;
@@ -41,9 +40,7 @@ import static org.junit.Assert.fail;
 @RunWith(JukitoRunner.class)
 public class OrderedMapsTest {
 
-    Cloner cloner = new Cloner();
-
-    public static class Modeule extends JukitoModule {
+    public static class Module extends JukitoModule {
 
         @Override
         protected void configureTest() {
