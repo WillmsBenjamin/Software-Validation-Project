@@ -146,31 +146,6 @@ public class OrderedMapsTest {
         assertEquals("TWO" , key);
     }
 
-//    /**
-//     *
-//     * Test nextKey() throws an error on empty map
-//     * @param map
-//     *
-//     * */
-//    @Test
-//    public void failNextKeyEmptyMap(@All("empty") OrderedMap map)
-//    {
-//        map.nextKey("ONE");
-//    }
-//
-//    /**
-//     *
-//     * Test nextKey() throws an error in a map of size 1
-//     * @param map
-//     *
-//     * */
-//    @Test
-//    public void failNextKeyOneElementMap(@All("one element") OrderedMap map)
-//    {
-//        Object key = map.nextKey("ONE");
-//        map.get(key);
-//    }
-
     /**
      *
      * Test nextKey() returns the key after the one specified in a filled map
