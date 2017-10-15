@@ -79,6 +79,29 @@ public class MapIteratorTest {
                         put("ONE", 1);
                         put("TWO", 2);
                     }});
+
+			// initialize empty instances of maps
+			bindManyNamedInstances(IterableMap.class, "empty", new ListOrderedMap(), new LinkedMap());
+
+			// initialize non-empty one element instances of maps
+			bindManyNamedInstances(IterableMap.class, "one element without TreeBidiMap",
+					new ListOrderedMap<String, Integer>() {{
+						put("ONE", 1);
+					}},
+					new LinkedMap<String, Integer>() {{
+						put("ONE", 1);
+					}});
+
+			// initialize non-empty instances of maps
+			bindManyNamedInstances(IterableMap.class, "filled without TreeBidiMap",
+					new ListOrderedMap<String, Integer>() {{
+						put("ONE", 1);
+						put("TWO", 2);
+					}},
+					new LinkedMap<String, Integer>() {{
+						put("ONE", 1);
+						put("TWO", 2);
+					}});
         }
     }
 
@@ -128,8 +151,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test(expected = NoSuchElementException.class)
-	public void failGetKeyEmptyMap(@All("empty") IterableMap map)
-	{
+	public void failGetKeyEmptyMap(@All("empty") IterableMap map) {
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
 		assertEquals("ONE" , iterator.getKey());
@@ -142,8 +164,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void shouldGetKeyOneMap(@All("one element") IterableMap map)
-	{
+	public void shouldGetKeyOneMap(@All("one element") IterableMap map) {
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
 		assertEquals("ONE" , iterator.getKey());
@@ -156,8 +177,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void shouldGetKeyFilledMap(@All("filled") IterableMap map)
-	{
+	public void shouldGetKeyFilledMap(@All("filled") IterableMap map) {
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
 		assertEquals("ONE" , iterator.getKey());
@@ -170,8 +190,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test(expected = NoSuchElementException.class)
-	public void failGetValueEmptyMap(@All("empty") IterableMap map)
-	{
+	public void failGetValueEmptyMap(@All("empty") IterableMap map) {
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
 		assertEquals(1 , iterator.getValue());
@@ -184,8 +203,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void shouldGetValueOneMap(@All("one element") IterableMap map)
-	{
+	public void shouldGetValueOneMap(@All("one element") IterableMap map) {
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
 		assertEquals(1 , iterator.getValue());
@@ -198,8 +216,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void shouldGetValueFilledMap(@All("filled") IterableMap map)
-	{
+	public void shouldGetValueFilledMap(@All("filled") IterableMap map) {
 		MapIterator iterator = map.mapIterator();
 		iterator.next();
 		assertEquals(1 , iterator.getValue());
@@ -212,8 +229,7 @@ public class MapIteratorTest {
      *
      * */
     @Test(expected = AssertionError.class)
-    public void failGetKeyOneMap(@All("one element") IterableMap map)
-    {
+    public void failGetKeyOneMap(@All("one element") IterableMap map) {
         MapIterator iterator = map.mapIterator();
         iterator.next();
         assertEquals("FOUR" , iterator.getKey());
@@ -226,8 +242,7 @@ public class MapIteratorTest {
      *
      * */
     @Test(expected = AssertionError.class)
-    public void failGetKeyFilledMap(@All("filled") IterableMap map)
-    {
+    public void failGetKeyFilledMap(@All("filled") IterableMap map) {
         MapIterator iterator = map.mapIterator();
         iterator.next();
         assertEquals("FOUR" , iterator.getKey());
@@ -240,8 +255,7 @@ public class MapIteratorTest {
      *
      * */
     @Test(expected = AssertionError.class)
-    public void failGetValueOneMap(@All("one element") IterableMap map)
-    {
+    public void failGetValueOneMap(@All("one element") IterableMap map) {
         MapIterator iterator = map.mapIterator();
         iterator.next();
         assertEquals(4 , iterator.getValue());
@@ -254,8 +268,7 @@ public class MapIteratorTest {
      *
      * */
     @Test(expected = AssertionError.class)
-    public void failGetValueFilledMap(@All("filled") IterableMap map)
-    {
+    public void failGetValueFilledMap(@All("filled") IterableMap map) {
         MapIterator iterator = map.mapIterator();
         iterator.next();
         assertEquals(4 , iterator.getValue());
