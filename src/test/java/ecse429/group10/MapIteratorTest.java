@@ -54,7 +54,8 @@ public class MapIteratorTest {
             bindManyNamedInstances(IterableMap.class, "empty", new ListOrderedMap(), new LinkedMap(), new TreeBidiMap());
 
             // initialize non-empty one element instances of maps
-            bindManyNamedInstances(IterableMap.class, "one element", new ListOrderedMap<String, Integer>() {{
+            bindManyNamedInstances(IterableMap.class, "one element",
+                    new ListOrderedMap<String, Integer>() {{
                         put("ONE", 1);
                     }},
                     new LinkedMap<String, Integer>() {{
@@ -65,7 +66,8 @@ public class MapIteratorTest {
                     }});
 
             // initialize non-empty instances of maps
-            bindManyNamedInstances(IterableMap.class, "filled", new ListOrderedMap<String, Integer>() {{
+            bindManyNamedInstances(IterableMap.class, "filled",
+                    new ListOrderedMap<String, Integer>() {{
                         put("ONE", 1);
                         put("TWO", 2);
                     }},
@@ -415,7 +417,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void failSetValueOneElement(@All("one element without TreeBidiMap") IterableMap map) {
+	public void shouldSetValueOneElement(@All("one element without TreeBidiMap") IterableMap map) {
 		IterableMap copiedMap = cloner.deepClone(map);
 		MapIterator iterator = copiedMap.mapIterator();
 		iterator.next();
@@ -430,7 +432,7 @@ public class MapIteratorTest {
 	 *
 	 * */
 	@Test
-	public void failSetValueFilledElement(@All("filled without TreeBidiMap") IterableMap map) {
+	public void shouldSetValueFilledElement(@All("filled without TreeBidiMap") IterableMap map) {
 		IterableMap copiedMap = cloner.deepClone(map);
 		MapIterator iterator = copiedMap.mapIterator();
 		iterator.next();
