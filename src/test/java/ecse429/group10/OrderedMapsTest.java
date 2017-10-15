@@ -83,8 +83,7 @@ public class OrderedMapsTest {
      *
      * */
     @Test(expected = NoSuchElementException.class)
-    public void failFirstKeyEmptyMap(@All("empty") OrderedMap map)
-    {
+    public void failFirstKeyEmptyMap(@All("empty") OrderedMap map) {
         map.firstKey();
     }
 
@@ -95,8 +94,7 @@ public class OrderedMapsTest {
      *
      * */
     @Test
-    public void shouldFirstKeyOneElementMap(@All("one element") OrderedMap map)
-    {
+    public void shouldFirstKeyOneElementMap(@All("one element") OrderedMap map) {
         Object key = map.firstKey();
         assertEquals("ONE" , key);
     }
@@ -108,8 +106,7 @@ public class OrderedMapsTest {
      *
      * */
     @Test
-    public void shouldFirstKeyFilledMap(@All("filled") OrderedMap map)
-    {
+    public void shouldFirstKeyFilledMap(@All("filled") OrderedMap map) {
         Object key = map.firstKey();
         assertEquals("ONE" , key);
     }
@@ -121,8 +118,7 @@ public class OrderedMapsTest {
      *
      * */
     @Test(expected = NoSuchElementException.class)
-    public void failLastKeyEmptyMap(@All("empty") OrderedMap map)
-    {
+    public void failLastKeyEmptyMap(@All("empty") OrderedMap map) {
         map.lastKey();
     }
 
@@ -133,8 +129,7 @@ public class OrderedMapsTest {
      *
      * */
     @Test
-    public void shouldLastKeyOneElementMap(@All("one element") OrderedMap map)
-    {
+    public void shouldLastKeyOneElementMap(@All("one element") OrderedMap map) {
         Object key = map.lastKey();
         assertEquals("ONE" , key);
     }
@@ -146,8 +141,7 @@ public class OrderedMapsTest {
      *
      * */
     @Test
-    public void shouldLastKeyFilledMap(@All("filled") OrderedMap map)
-    {
+    public void shouldLastKeyFilledMap(@All("filled") OrderedMap map) {
         Object key = map.lastKey();
         assertEquals("TWO" , key);
     }
@@ -184,8 +178,7 @@ public class OrderedMapsTest {
      *
      * */
     @Test
-    public void shouldNextKeyFilledMap(@All("filled") OrderedMap map)
-    {
+    public void shouldNextKeyFilledMap(@All("filled") OrderedMap map) {
         Object key = map.nextKey("ONE");
         assertEquals("TWO" , key);
     }
@@ -197,10 +190,74 @@ public class OrderedMapsTest {
      *
      * */
     @Test
-    public void shouldPreviousKeyFilledMap(@All("filled") OrderedMap map)
-    {
+    public void shouldPreviousKeyFilledMap(@All("filled") OrderedMap map) {
         Object key = map.previousKey("TWO");
         assertEquals("ONE" , key);
+    }
+
+    /**
+     *
+     * Test adding element to map
+     * @param map
+     *
+     * */
+    @Test
+    public void putElementEmptyMap(ListOrderedMap map) {
+        map = new ListOrderedMap();
+        map.put("ONE" , 1);
+        assertEquals(1 , map.size());
+        assertEquals(1 , map.getValue(0));
+        assertEquals("ONE" , map.get(0));
+    }
+
+    /**
+     *
+     * Test adding multiple element at once to map
+     * @param map
+     *
+     * */
+    @Test
+    public void putAllElementEmptyMap(ListOrderedMap map , ListOrderedMap add) {
+        map = new ListOrderedMap();
+        add = new ListOrderedMap();
+        add.put("ONE" , 1);
+        add.put("TWO" , 2);
+        add.put("THREE" , 3);
+        map.putAll(add);
+        assertEquals(3 , map.size());
+        assertEquals(1 , map.getValue(0));
+        assertEquals("ONE" , map.get(0));
+        assertEquals(2 , map.getValue(1));
+        assertEquals("TWO" , map.get(1));
+        assertEquals(3 , map.getValue(2));
+        assertEquals("THREE" , map.get(2));
+    }
+
+    /**
+     *
+     * Test removing element from map
+     * @param map
+     *
+     * */
+    @Test
+    public void shoudRemoveElementMap(ListOrderedMap map) {
+        map = new ListOrderedMap();
+        map.put("ONE" , 1);
+        map.put("TWO" , 2);
+        map.remove(1);
+        assertEquals(1 , map.size());
+    }
+
+    /**
+     *
+     * Test that removing an element from an empty map throws an exception
+     * @param map
+     *
+     * */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void failRemoveEmptyMap(ListOrderedMap map) {
+        map = new ListOrderedMap();
+        map.remove(0);
     }
 
     /**
@@ -343,5 +400,31 @@ public class OrderedMapsTest {
         map.put("ONE" , 1);
         map.put("TWO" , 2);
         assertEquals(3 , map.getValue(2));
+    }
+
+    /**
+     *
+     * Test modifying a value given a specified index in a non-empty map
+     * @param map
+     *
+     * */
+    @Test
+    public void shouldSetValueMap(ListOrderedMap map) {
+        map = new ListOrderedMap();
+        map.put("ONE" , 1);
+        map.setValue(0 , 0);
+        assertEquals(0 , map.getValue(0));
+    }
+
+    /**
+     *
+     * Test modifying a value given a specified index in an empty map
+     * @param map
+     *
+     * */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void shouldSetValueEmptyMap(ListOrderedMap map) {
+        map = new ListOrderedMap();
+        map.setValue(0 , 0);
     }
 }
