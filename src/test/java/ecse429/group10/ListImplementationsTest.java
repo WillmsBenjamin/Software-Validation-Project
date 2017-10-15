@@ -277,7 +277,7 @@ public class ListImplementationsTest {
      */
     @Test
     public void shouldNotContainAllItems(@All("filled") List list) {
-        assertEquals(false, list.containsAll(Arrays.asList("test1", "test2")));
+        assertEquals(false, list.containsAll(Arrays.asList("xyz", "test2")));
     }
 
     /**
