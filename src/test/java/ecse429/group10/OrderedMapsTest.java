@@ -187,6 +187,23 @@ public class OrderedMapsTest {
 
     /**
      *
+     * Test adding element to map at a specified index
+     * @param map
+     *
+     * */
+    @Test
+    public void putIndexedElementEmptyMap(ListOrderedMap map) {
+        map = new ListOrderedMap();
+        map.put("TWO" , 2);
+        map.put("THREE" , 3);
+        map.put(0 , "ONE" , 1);
+        assertEquals(3 , map.size());
+        assertEquals(1 , map.getValue(0));
+        assertEquals("ONE" , map.get(0));
+    }
+
+    /**
+     *
      * Test adding multiple element at once to map
      * @param map
      *
