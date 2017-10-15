@@ -77,10 +77,10 @@ public class CircularFifoQueueTest {
      * */
     @Test
     public void shouldAddEmptyQueue() {
-        CircularFifoQueue copiedQueue = cloner.deepClone(this.emptyQueue);
-        copiedQueue.add(0);
-        assertEquals(1 , copiedQueue.size());
-        assertEquals(0 , copiedQueue.get(0));
+        int element = 0;
+        this.emptyQueue.add(element);
+        assertEquals(1 , this.emptyQueue.size());
+        assertEquals(0 , this.emptyQueue.get(0));
     }
 
     /**
@@ -90,10 +90,9 @@ public class CircularFifoQueueTest {
      * */
     @Test
     public void shouldAddFilledQueue() {
-        CircularFifoQueue copiedQueue = cloner.deepClone(this.filledQueue);
-        copiedQueue.add(0);
-        assertEquals(10 , copiedQueue.size());
-        assertEquals(0 , copiedQueue.get(9));
+        int element = 0;
+        this.filledQueue.add(element);
+        assertEquals(0 , this.filledQueue.get(9));
     }
 
     /**
@@ -103,21 +102,8 @@ public class CircularFifoQueueTest {
      * */
     @Test
     public void shoudlClearQueue() {
-        CircularFifoQueue copiedQueue = cloner.deepClone(this.filledQueue);
-        copiedQueue.clear();
-        assertEquals(0 , copiedQueue.size());
-    }
-
-    /**
-     *
-     * Test clearing an empty queue
-     *
-     * */
-    @Test
-    public void shoudlClearEmptyQueue() {
-        CircularFifoQueue copiedQueue = cloner.deepClone(this.emptyQueue);
-        copiedQueue.clear();
-        assertEquals(0 , copiedQueue.size());
+        this.filledQueue.clear();
+        assertEquals(0 , this.filledQueue.size());
     }
 
     /**
@@ -218,7 +204,7 @@ public class CircularFifoQueueTest {
 
     /**
      *
-     * test the peek method on empty queue
+     * test the peek method on nonempty queue
      *
      * */
     @Test
@@ -238,7 +224,7 @@ public class CircularFifoQueueTest {
 
     /**
      *
-     * test the element method on empty queue
+     * test the element method on nonempty queue
      *
      * */
     @Test
@@ -253,19 +239,17 @@ public class CircularFifoQueueTest {
      * */
     @Test
     public void shouldPollEmpty() {
-        CircularFifoQueue copiedQueue = cloner.deepClone(this.emptyQueue);
-        assertEquals(null , copiedQueue.poll());
+        assertEquals(null , this.emptyQueue.poll());
     }
 
     /**
      *
-     * test the poll method on empty queue
+     * test the poll method on nonempty queue
      *
      * */
     @Test
     public void shouldPollFilled() {
-        CircularFifoQueue copiedQueue = cloner.deepClone(this.filledQueue);
-        assertEquals(0 , copiedQueue.poll());
+        assertEquals(0 , this.filledQueue.poll());
     }
 
     /**
@@ -275,19 +259,18 @@ public class CircularFifoQueueTest {
      * */
     @Test(expected = NoSuchElementException.class)
     public void failRemoveEmpty() {
-        CircularFifoQueue copiedQueue = cloner.deepClone(this.emptyQueue);
-        assertEquals(null , copiedQueue.remove());
+        assertEquals(null , this.emptyQueue.remove());
     }
 
     /**
      *
-     * test the remove method on empty queue
+     * test the remove method on nonempty queue
      *
      * */
     @Test
     public void shouldRemoveFilled() {
-        CircularFifoQueue copiedQueue = cloner.deepClone(this.filledQueue);
-        assertEquals(0 , copiedQueue.element());
+        assertEquals(0 , this.filledQueue.remove());
+        assertEquals(9 , this.filledQueue.size());
     }
 
 }
