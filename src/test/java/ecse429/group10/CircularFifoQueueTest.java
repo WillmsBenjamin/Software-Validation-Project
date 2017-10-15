@@ -44,8 +44,10 @@ public class CircularFifoQueueTest {
      * */
     @Test
     public void shouldReturnSize() {
-        assertEquals(0 , this.emptyQueue.size());
-        assertEquals(10 , this.filledQueue.size());
+        int emptySize = this.emptyQueue.size();
+        int filledSize = this.filledQueue.size();
+        assertEquals(0 , emptySize);
+        assertEquals(10 , filledSize);
     }
 
     /**
@@ -63,9 +65,9 @@ public class CircularFifoQueueTest {
      * Test reading an element from a filled queue
      *
      * */
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void shouldReadElementFilledQueue() {
-        assertEquals(0 , this.emptyQueue.get(0));
+        assertEquals(0 , this.filledQueue.get(0));
     }
 
     /**
