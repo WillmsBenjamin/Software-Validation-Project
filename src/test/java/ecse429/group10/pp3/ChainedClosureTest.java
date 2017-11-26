@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
+import org.junit.rules.ExpectedException;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class ChainedClosureTest {
         Closure<String> closure1 = (String x) -> System.out.println(x + " - CLOSURE 1");
         Closure<String> closure2 = (String x) -> System.out.println(x + " - CLOSURE 2");
         Predicate<String> predicate1 = (String x) -> x.length() < 25;
-        Predicate<String> predicate2 = (String x) -> x.length() < 10;
+        Predicate<String> predicate2 = (String x) -> x.length() > 10;
         Predicate[] predicates = {predicate1, predicate2};
         Closure[] bufferClosures = {closure1, closure2};
 
@@ -76,12 +77,7 @@ public class ChainedClosureTest {
 
 
     @Test
-    public void shouldReturnNewChainedClosureWithCollectionConstructorOverload() {
-        Closure<String> testChainedClosure = ChainedClosure.chainedClosure(closuresList);
-    }
-
-    @Test
-    public void shouldReturnNewChainedClosureWithMultipleClosuresConstructorOverload(){
+    public void shouldReturnNewChainedClosureWithMultipleClosuresFactoryOverload(){
         Closure<String> testChainedClosure = ChainedClosure.chainedClosure(switchClosure, chainedClosure, catchAndRethrowClosure);
 
         assertNotEquals(NOPClosure.nopClosure(), testChainedClosure);
@@ -89,9 +85,39 @@ public class ChainedClosureTest {
     }
 
     @Test
-    public void shouldReturnEmptyClosure(){
+    public void shouldReturnEmptyClosureWithMultipleClosuresFactoryOverload(){
         Closure<String> testChainedClosure = ChainedClosure.chainedClosure();
 
+        assertEquals(NOPClosure.nopClosure(), testChainedClosure);
+    }
+
+    @Test
+    public void shouldReturnNewChainedClosureWithCollectionFactoryOverload() {
+        Closure<String> testChainedClosure = ChainedClosure.chainedClosure(closuresList);
+
+        assertEquals(closuresList, Arrays.asList(((ChainedClosure<String>)testChainedClosure).getClosures()));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void failWithNullPointerExceptionWithNullClosureWithCollectionFactoryOverload() {
+        ArrayList nullArrayList = null;
+        Closure<String> testChainedClosure = ChainedClosure.chainedClosure(nullArrayList);
+    }
+
+    @Test
+    public void shouldReturnEmptyClosureWithCollectionFactoryOverload(){
+        ArrayList nullArrayList = new ArrayList();
+
+        Closure<String> testChainedClosure = ChainedClosure.chainedClosure(nullArrayList);
+
+        assertEquals(NOPClosure.nopClosure(), testChainedClosure);
+    }
+
+    @Test
+    public void shouldExecuteClosure(){
+        Closure<String> testChainedClosure = ChainedClosure.chainedClosure(closuresList);
+        testChainedClosure.execute("TEST-CLOSURES");
+        assertEquals("TEST-CLOSURES - CLOSURE 1\nTEST-CLOSURES - CLOSURE 1\nTEST-CLOSURES - CLOSURE 2\n", systemOutRule.getLog());
     }
 
     //endregion
