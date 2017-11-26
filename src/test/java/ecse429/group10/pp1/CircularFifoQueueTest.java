@@ -1,9 +1,18 @@
-package ecse429.group10;
+package ecse429.group10.pp1;
 
 import com.rits.cloning.Cloner;
+import org.apache.commons.collections4.MapIterator;
+import org.apache.commons.collections4.Trie;
+import org.apache.commons.collections4.Unmodifiable;
+import org.apache.commons.collections4.iterators.AbstractMapIteratorDecorator;
+import org.apache.commons.collections4.iterators.EmptyMapIterator;
+import org.apache.commons.collections4.iterators.UnmodifiableMapIterator;
 import org.apache.commons.collections4.queue.CircularFifoQueue;
+import org.apache.commons.collections4.trie.PatriciaTrie;
+import org.apache.commons.collections4.trie.UnmodifiableTrie;
 import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -15,6 +24,7 @@ import static org.junit.Assert.assertTrue;
  * Test for the Queue interface inside of the Apache commons collection
  */
 
+@Ignore
 public class CircularFifoQueueTest {
 
     private CircularFifoQueue emptyQueue;
@@ -48,6 +58,13 @@ public class CircularFifoQueueTest {
         int filledSize = this.filledQueue.size();
         assertEquals(0 , emptySize);
         assertEquals(10 , filledSize);
+
+        MapIterator test2 = new AbstractMapIteratorDecorator(EmptyMapIterator.INSTANCE);
+        MapIterator test = new AbstractMapIteratorDecorator(test2);
+
+        Trie test1 = new UnmodifiableTrie(new PatriciaTrie());
+
+        UnmodifiableTrie trie = new UnmodifiableTrie(test1);
     }
 
     /**

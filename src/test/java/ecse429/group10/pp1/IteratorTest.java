@@ -1,4 +1,4 @@
-package ecse429.group10;
+package ecse429.group10.pp1;
 
 
 import com.rits.cloning.Cloner;
@@ -6,6 +6,7 @@ import org.apache.commons.collections4.iterators.*;
 import org.jukito.All;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,6 +16,7 @@ import java.util.ListIterator;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore
 @RunWith(JukitoRunner.class)
 public class IteratorTest {
     Cloner cloner = new Cloner();

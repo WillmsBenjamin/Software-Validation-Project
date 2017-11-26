@@ -1,4 +1,4 @@
-package ecse429.group10;
+package ecse429.group10.pp1;
 
 import com.rits.cloning.Cloner;
 import org.apache.commons.collections4.list.CursorableLinkedList;
@@ -9,6 +9,7 @@ import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,6 +24,7 @@ import static junit.framework.Assert.assertEquals;
  * Test for concrete implementations of the List interface inside of the Apache commons collection
  */
 
+@Ignore
 @RunWith(JukitoRunner.class)
 public class ListImplementationsTest {
 

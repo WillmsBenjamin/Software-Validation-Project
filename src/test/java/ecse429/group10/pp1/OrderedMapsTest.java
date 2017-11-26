@@ -1,4 +1,4 @@
-package ecse429.group10;
+package ecse429.group10.pp1;
 
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.IterableMap;
@@ -17,10 +17,7 @@ import org.hamcrest.internal.ArrayIterator;
 import org.jukito.All;
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 
 import static java.util.Comparator.*;
@@ -37,6 +34,7 @@ import static org.junit.Assert.fail;
  * Test for the OrderedMap interface of the Apache commons collection
  */
 
+@Ignore
 @RunWith(JukitoRunner.class)
 public class OrderedMapsTest {
 
