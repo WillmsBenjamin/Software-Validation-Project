@@ -68,7 +68,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
-    public void shouldReturnSynchronizedBagNullInput() {
+    public void shouldFailSynchronizedBagWithNullPointerException() {
         try {
             BagUtils.synchronizedBag(null);
         } catch (Exception e) {
@@ -95,7 +95,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
-    public void shouldReturnUnmodifiableBagNullInput() {
+    public void shouldFailUnmodifiableBagWithNullPointerException() {
         try {
             BagUtils.unmodifiableBag(null);
         } catch (Exception e) {
@@ -130,7 +130,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input (bag, or predicate).
      */
     @Test
-    public void shouldReturnPredicatedBagNullInput() {
+    public void shouldFailPredicatedBagWithNullPointerException() {
         int i = 0;
         try {
             BagUtils.predicatedBag(null, FalsePredicate.INSTANCE);
@@ -171,7 +171,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input (bag, or transformer).
      */
     @Test
-    public void shouldReturnTransformedBagNullInput() {
+    public void shouldFailTransformingBagWithNullPointerException() {
         int i = 0;
         try {
             BagUtils.transformingBag(null, new PredicateTransformer(NotNullPredicate.INSTANCE));
@@ -208,7 +208,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
-    public void shouldReturnCollectionBagNullInput() {
+    public void shouldFailCollectionBagWithNullPointerException() {
         try {
             BagUtils.collectionBag(null);
         } catch (Exception e) {
@@ -237,7 +237,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
-    public void shouldReturnSynchronizedSortedBagNullInput() {
+    public void shouldFailSynchronizedSortedBagWithNullPointerException() {
         try {
             BagUtils.synchronizedSortedBag(null);
         } catch (Exception e) {
@@ -266,7 +266,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
-    public void shouldReturnUnmodifiableSortedBagNullInput() {
+    public void shouldFailUnmodifiableSortedBagWithNullPointerException() {
         try {
             BagUtils.unmodifiableSortedBag(null);
         } catch (Exception e) {
@@ -303,7 +303,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input (bag, or predicate).
      */
     @Test
-    public void shouldReturnPredicatedSortedBagNullInput() {
+    public void shouldFailPredicatedSortedBagWithNullPointerException() {
         int i = 0;
         try {
             BagUtils.predicatedSortedBag(null, FalsePredicate.INSTANCE);
@@ -346,7 +346,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input (bag, or transformer).
      */
     @Test
-    public void shouldReturnTransformedSortedBagNullInput() {
+    public void shouldFailTransformedSortedBagWithNullPointerException() {
         int i = 0;
         try {
             BagUtils.transformingSortedBag(null, new PredicateTransformer(NotNullPredicate.INSTANCE));
