@@ -346,7 +346,7 @@ public class BagUtilsTest {
      * It checks whether the method throws a null pointer exception on null input (bag, or transformer).
      */
     @Test
-    public void shouldFailTransformedSortedBagWithNullPointerException() {
+    public void shouldFailTransformingSortedBagWithNullPointerException() {
         int i = 0;
         try {
             BagUtils.transformingSortedBag(null, new PredicateTransformer(NotNullPredicate.INSTANCE));
