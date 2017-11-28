@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  * Created by ben on 11/27/17.
  */
 
-public class BagUtilsTest {
+public class ŒBagUtilsTest {
 
     /*
      * As explained in project part 2, BagUtils depends on Bag and SortedBag.
