@@ -52,7 +52,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "synchronizedBag(final Bag<E> bag)".
+     * Test 3.01: for method "synchronizedBag(final Bag<E> bag)".
      * It checks whether the method returns a SynchronizedBag type.
      */
     @Test
@@ -64,7 +64,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "synchronizedBag(final Bag<E> bag)".
+     * Test 3.02: for method "synchronizedBag(final Bag<E> bag)".
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
@@ -79,7 +79,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "unmodifiableBag(final Bag<E> bag)".
+     * Test 3.03: for method "unmodifiableBag(final Bag<E> bag)".
      * It checks whether the method returns an UnmodifiableBag type.
      */
     @Test
@@ -91,7 +91,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "unmodifiableBag(final Bag<E> bag)".
+     * Test 3.04: for method "unmodifiableBag(final Bag<E> bag)".
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
@@ -106,7 +106,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "predicatedBag(final Bag<E> bag, final Predicate<? super E> predicate)".
+     * Test 3.05: for method "predicatedBag(final Bag<E> bag, final Predicate<? super E> predicate)".
      * It checks whether the method returns a PredicatedBag type with the specified predicate (not null).
      */
     @Test
@@ -126,7 +126,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "predicatedBag(final Bag<E> bag, final Predicate<? super E> predicate)".
+     * Test 3.06: for method "predicatedBag(final Bag<E> bag, final Predicate<? super E> predicate)".
      * It checks whether the method throws a null pointer exception on null input (bag, or predicate).
      */
     @Test
@@ -151,7 +151,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "transformingBag(final Bag<E> bag, final Transformer<? super E, ? extends E> transformer)".
+     * Test 3.07: for method "transformingBag(final Bag<E> bag, final Transformer<? super E, ? extends E> transformer)".
      * It checks whether the method returns a TransformedBag type with the specified transformer.
      */
     @Test
@@ -167,7 +167,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "transformingBag(final Bag<E> bag, final Transformer<? super E, ? extends E> transformer)".
+     * Test 3.08: for method "transformingBag(final Bag<E> bag, final Transformer<? super E, ? extends E> transformer)".
      * It checks whether the method throws a null pointer exception on null input (bag, or transformer).
      */
     @Test
@@ -192,7 +192,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "collectionBag(final Bag<E> bag)".
+     * Test 3.09: for method "collectionBag(final Bag<E> bag)".
      * It checks whether the method returns a CollectionBag type.
      */
     @Test
@@ -204,7 +204,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "collectionBag(final Bag<E> bag)".
+     * Test 3.10: for method "collectionBag(final Bag<E> bag)".
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
@@ -219,7 +219,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "synchronizedSortedBag(final SortedBag<E> bag)".
+     * Test 3.11: for method "synchronizedSortedBag(final SortedBag<E> bag)".
      * It checks whether the method returns a SynchronizedSortedBag type.
      */
     @Test
@@ -233,7 +233,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "synchronizedSortedBag(final SortedBag<E> bag)".
+     * Test 3.12: for method "synchronizedSortedBag(final SortedBag<E> bag)".
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
@@ -248,7 +248,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "unmodifiableSortedBag(final SortedBag<E> bag)".
+     * Test 3.13: for method "unmodifiableSortedBag(final SortedBag<E> bag)".
      * It checks whether the method returns an UnmodifiableBag type.
      */
     @Test
@@ -262,7 +262,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "unmodifiableSortedBag(final SortedBag<E> bag)".
+     * Test 3.14: for method "unmodifiableSortedBag(final SortedBag<E> bag)".
      * It checks whether the method throws a null pointer exception on null input.
      */
     @Test
@@ -277,7 +277,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "predicatedSortedBag(final SortedBag<E> bag, final Predicate<? super E> predicate)".
+     * Test 3.15: for method "predicatedSortedBag(final SortedBag<E> bag, final Predicate<? super E> predicate)".
      * It checks whether the method returns a PredicatedSortedBag type with the specified predicate (not null).
      */
     @Test
@@ -299,7 +299,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "predicatedSortedBag(final SortedBag<E> bag, final Predicate<? super E> predicate)".
+     * Test 3.16: for method "predicatedSortedBag(final SortedBag<E> bag, final Predicate<? super E> predicate)".
      * It checks whether the method throws a null pointer exception on null input (bag, or predicate).
      */
     @Test
@@ -324,7 +324,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "transformingSortedBag(final SortedBag<E> bag, final Transformer<? super E, ? extends E> transformer)".
+     * Test 3.17: for method "transformingSortedBag(final SortedBag<E> bag, final Transformer<? super E, ? extends E> transformer)".
      * It checks whether the method returns a TransformedSortedBag type with the specified transformer.
      */
     @Test
@@ -342,7 +342,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "transformingSortedBag(final SortedBag<E> bag, final Transformer<? super E, ? extends E> transformer)".
+     * Test 3.18: for method "transformingSortedBag(final SortedBag<E> bag, final Transformer<? super E, ? extends E> transformer)".
      * It checks whether the method throws a null pointer exception on null input (bag, or transformer).
      */
     @Test
@@ -367,7 +367,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "emptyBag()".
+     * Test 3.19: for method "emptyBag()".
      * It checks whether the method returns an empty UnmodifiableBag type.
      */
     @Test
@@ -378,7 +378,7 @@ public class ŒBagUtilsTest {
     }
 
     /*
-     * Test for method "emptySortedBag()".
+     * Test 3.20: for method "emptySortedBag()".
      * It checks whether the method returns an empty UnmodifiableSortedBag type.
      */
     @Test
