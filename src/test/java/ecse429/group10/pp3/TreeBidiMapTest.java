@@ -7,6 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Map;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 
 public class TreeBidiMapTest {
@@ -23,6 +26,7 @@ public class TreeBidiMapTest {
         hMap.put(5, "eee");
         hMap.put(6, "fff");
         hMap.put(7, "ggg");
+
     }
 
     @After
@@ -282,5 +286,503 @@ public class TreeBidiMapTest {
     public void shouldReturnMapIsNotEmpty() {
         TreeBidiMap nonEmptyMap = new TreeBidiMap(hMap);
         assertFalse(nonEmptyMap.isEmpty());
+    }
+
+    /*
+     * Test 2.20: Test for new EntrySet with empty map
+     */
+    @Test
+    public void shouldReturnNewEntrySet(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        Set<TreeBidiMap.Entry> returnedSet = emptyMap.entrySet();
+        assertNotNull(returnedSet);
+        assertEquals(0, returnedSet.size());
+
+    }
+
+    /*
+     * Test 2.21: Test for retrieval ofEntrySet with nonempty map
+     */
+    @Test
+    public void shouldReturnEntryView(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        Set<TreeBidiMap.Entry> returnedSet = map.entrySet();
+        assertNotNull(returnedSet);
+        assertEquals( 7, returnedSet.size());
+    }
+
+    /*
+     * Test 2.22: Test get(key) with empty map
+     */
+    @Test
+    public void shouldReturnNullKeyNotPresentTreeEmpty(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        assertNull(emptyMap.get(1));
+    }
+
+    /*
+     * Test 2.23: Test get(key) with value present in nonempty map
+     */
+    @Test
+    public void shouldReturnValueFromKey(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertEquals("aaa", map.get(1));
+    }
+
+    /*
+     * Test 2.24: Test get(key) with value not present in nonempty map
+     */
+    @Test
+    public void shouldReturnNullKeyNotPresent(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertNull(map.get(23));
+    }
+
+    /*
+     * Test 2.25: Test get(key) with non comparable key
+     */
+    @Test
+    public void shouldThrowClassCastExceptionKeyWrongType_get(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int[] array = new int[5];
+        try {
+            map.get(array);
+        } catch(Exception e) {
+            assertTrue(e instanceof ClassCastException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.26: Test get(key) with null key
+     */
+    @Test
+    public void shouldThrowClassCastExceptionKeyNull_get(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        try {
+            map.get(null);
+        } catch(Exception e) {
+            assertTrue(e instanceof NullPointerException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.27: Test getKey(value) with empty map
+     */
+    @Test
+    public void shouldReturnNullValueNotPresentTreeEmpty(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        assertNull(emptyMap.getKey("value"));
+    }
+
+    /*
+     * Test 2.28: Test getKey(value) with value present in nonempty map
+     */
+    @Test
+    public void shouldReturnKeyFromValue(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertEquals(1, map.getKey("aaa"));
+    }
+
+    /*
+     * Test 2.29: Test getKey(value) with value not present in nonempty map
+     */
+    @Test
+    public void shouldReturnNullValueNotPresent(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertNull(map.getKey("wrong"));
+    }
+
+    /*
+     * Test 2.30: Test get(key) with non comparable key
+     */
+    @Test
+    public void shouldThrowClassCastExceptionValueWrongType_getKey(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int[] array = new int[5];
+        try {
+            map.getKey(array);
+        } catch(Exception e) {
+            assertTrue(e instanceof ClassCastException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.31: Test get(key) with null key
+     */
+    @Test
+    public void shouldThrowClassCastExceptionValueNull_getKey(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        try {
+            map.getKey(null);
+        } catch(Exception e) {
+            assertTrue(e instanceof NullPointerException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.32: Test put of one element in empty TreeBidiMap
+     */
+    @Test
+    public void shouldIncreaseSizeToOne(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        emptyMap.put(1, "new");
+        assertFalse(emptyMap.isEmpty());
+        assertTrue(emptyMap.containsKey(1));
+        assertTrue(emptyMap.containsValue("new"));
+        assertEquals( 1, emptyMap.size());
+    }
+
+    /*
+     * Test 2.33: Test put of one element in nonempty TreeBidiMap
+     */
+    @Test
+    public void shouldIncreaseSizeByOne(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        map.put(9, "new");
+        assertFalse(map.isEmpty());
+        assertTrue(map.containsKey(9));
+        assertTrue(map.containsValue("new"));
+        assertEquals( prev_size+1 , map.size());
+    }
+
+    /*
+     * Test 2.34: Test put of one element with existing key in nonempty TreeBidiMap
+     */
+    @Test
+    public void shouldReplaceExistingValue(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        map.put(1, "new");
+        assertFalse(map.isEmpty());
+        assertTrue(map.containsKey(1));
+        assertTrue(map.containsValue("new"));
+        assertEquals( prev_size , map.size());
+        assertEquals("new", map.get(1));
+        assertEquals(1, map.getKey("new"));
+    }
+
+    /*
+     * Test 2.35: Test put of one element with existing value in nonempty TreeBidiMap
+     */
+    @Test
+    public void shouldReplaceRemoveExistingKey(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        map.put(9, "aaa");
+        assertFalse(map.isEmpty());
+        assertTrue(map.containsKey(9));
+        assertTrue(map.containsValue("aaa"));
+        assertFalse(map.containsKey(1));
+        assertEquals( prev_size , map.size());
+        assertEquals("aaa", map.get(9));
+        assertEquals(9, map.getKey("aaa"));
+    }
+
+    /*
+     * Test 2.36: Test put of one element with key of invalid type
+     */
+    @Test
+    public void shouldFailThrowClassCastException_put(){
+        TreeBidiMap map = new TreeBidiMap();
+        int[] array = new int[5];
+        try {
+            map.put(array, "new");
+        } catch(Exception e) {
+            assertTrue(e instanceof ClassCastException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.37: Test put of one element with null key
+     */
+    @Test
+    public void shouldFailThrowNullPointerException_put(){
+        TreeBidiMap map = new TreeBidiMap();
+
+        try {
+            map.put(null, "new");
+        } catch(Exception e) {
+            assertTrue(e instanceof NullPointerException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.38 Test remove of one element with empty map
+     */
+    @Test
+    public void shouldReturnNullNoMappingToRemove(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        assertNull(emptyMap.remove(1));
+    }
+
+    /*
+    * Test 2.39 Test remove of one element present in nonempty map
+    */
+    @Test
+    public void shouldReturnValueOfMappingRemoved(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        assertEquals("aaa", map.remove(1));
+        assertEquals(prev_size - 1, map.size());
+    }
+
+    /*
+    * Test 2.40 Test remove of one element not present in nonempty map
+    */
+    @Test
+    public void shouldReturnNullValueToRemoveNotMapped(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        assertNull( map.remove(34));
+        assertEquals(prev_size, map.size());
+    }
+
+    /*
+     * Test 2.41: Test remove of one element with key of invalid type
+     */
+    @Test
+    public void shouldFailThrowClassCastException_remove(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int[] array = new int[5];
+        try {
+            map.remove(array);
+        } catch(Exception e) {
+            assertTrue(e instanceof ClassCastException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.42: Test remove of one element with null key
+     */
+    @Test
+    public void shouldFailThrowNullPointerException_remove(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+
+        try {
+            map.remove(null);
+        } catch(Exception e) {
+            assertTrue(e instanceof NullPointerException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.43: Test putAll of empty map into empty map
+     */
+    @Test
+    public void shouldNotAlterNewMap(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        TreeBidiMap map = new TreeBidiMap();
+        assertTrue(emptyMap.isEmpty());
+        map.putAll(emptyMap);
+        assertTrue(map.isEmpty());
+    }
+
+    /*
+     * Test 2.44: Test putAll of nonempty map into empty map
+     */
+    @Test
+    public void shouldChangeMapSizeToOtherMapSize(){
+        TreeBidiMap otherMap = new TreeBidiMap(hMap);
+        TreeBidiMap map = new TreeBidiMap();
+        int size = otherMap.size();
+        assertFalse(otherMap.isEmpty());
+        map.putAll(otherMap);
+        assertFalse(map.isEmpty());
+        assertEquals(size, map.size());
+    }
+
+    /*
+     * Test 2.45: Test putAll of empty map into nonempty map
+     */
+    @Test
+    public void shouldNotAlterNewNonEmptyMap(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int size = map.size();
+        assertTrue(emptyMap.isEmpty());
+        assertFalse(map.isEmpty());
+        map.putAll(emptyMap);
+        assertFalse(map.isEmpty());
+        assertEquals(size, map.size());
+    }
+
+    /*
+     * Test 2.46: Test putAll of nonempty map into nonempty map with different pairing
+     */
+    @Test
+    public void shouldChangeSizeToSumOfMaps(){
+        HashedMap hMap2;
+        hMap2 = new HashedMap(3);
+        hMap2.put(8, "zzz");
+        hMap2.put(9, "yyy");
+        hMap2.put(10, "xxx");
+        hMap2.put(11, "www");
+        hMap2.put(12, "vvv");
+        hMap2.put(13, "uuu");
+        hMap2.put(14, "ttt");
+
+        TreeBidiMap otherMap = new TreeBidiMap(hMap2);
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int othersize = otherMap.size();
+        int size = map.size();
+        assertFalse(otherMap.isEmpty());
+        assertFalse(map.isEmpty());
+        map.putAll(otherMap);
+        assertFalse(map.isEmpty());
+        assertEquals(size+othersize, map.size());
+
+    }
+
+    /*
+     * Test 2.47: Test putAll of nonempty map into nonempty map with matching key
+     */
+    @Test
+    public void shouldResultInValueMappingChange(){
+        TreeBidiMap otherMap = new TreeBidiMap(hMap);
+        TreeBidiMap map = new TreeBidiMap(hMap);
+
+        otherMap.put(3, "hello");
+        otherMap.put(4, "wazaap");
+
+        int size = map.size();
+        assertFalse(otherMap.isEmpty());
+        assertFalse(map.isEmpty());
+
+        assertEquals("ccc", map.get(3));
+        assertEquals("ddd", map.get(4));
+
+        map.putAll(otherMap);
+
+        assertFalse(map.isEmpty());
+        assertEquals(size, map.size());
+        assertEquals("hello", map.get(3));
+        assertEquals("wazaap", map.get(4));
+    }
+
+    /*
+     * Test 2.48: Test putAll of nonempty map into nonempty map with matching value
+     */
+    @Test
+    public void shouldResultInKeyMappingChange(){
+        TreeBidiMap otherMap = new TreeBidiMap(hMap);
+        TreeBidiMap map = new TreeBidiMap(hMap);
+
+        otherMap.put(34, "bbb");
+        otherMap.put(23, "aaa");
+
+        int size = map.size();
+        assertFalse(otherMap.isEmpty());
+        assertFalse(map.isEmpty());
+
+        assertEquals(1, map.getKey("aaa"));
+        assertEquals(2, map.getKey("bbb"));
+
+        map.putAll(otherMap);
+
+        assertFalse(map.isEmpty());
+        assertEquals(size, map.size());
+        assertNull(map.get(1));
+        assertNull(map.get(2));
+        assertEquals(34, map.getKey("bbb"));
+        assertEquals(23, map.getKey("aaa"));
+    }
+
+    /*
+     * Test 2.49: Test putAll of nonempty map into nonempty map with exact same entries
+     */
+    @Test
+    public void shouldNotAlterMap_putAll(){
+        TreeBidiMap otherMap = new TreeBidiMap(hMap);
+        TreeBidiMap map = new TreeBidiMap(hMap);
+
+        int othersize = otherMap.size();
+        int size = map.size();
+
+        assertEquals(size, othersize);
+
+        map.putAll(otherMap);
+
+        assertEquals(size, map.size());
+
+    }
+
+    /*
+     * Test 2.50 Test remove of one element with empty map
+     */
+    @Test
+    public void shouldReturnNullNoValueMappingToRemove(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        assertNull(emptyMap.removeValue("aaa"));
+    }
+
+    /*
+     * Test 2.51 Test remove of one element present in nonempty map
+     */
+    @Test
+    public void shouldReturnKeyOfMappingRemoved(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        assertEquals(1, map.removeValue("aaa"));
+        assertEquals(prev_size - 1, map.size());
+    }
+
+    /*
+     * Test 2.52 Test remove of one element not present in nonempty map
+     */
+    @Test
+    public void shouldReturnNullKeyToRemoveNotMapped(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        assertNull( map.removeValue("wrong"));
+        assertEquals(prev_size, map.size());
+    }
+
+    /*
+     * Test 2.53: Test remove of one element with key of invalid type
+     */
+    @Test
+    public void shouldFailThrowClassCastException_removeValue(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int[] array = new int[5];
+        try {
+            map.removeValue(array);
+        } catch(Exception e) {
+            assertTrue(e instanceof ClassCastException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.54: Test remove of one element with null key
+     */
+    @Test
+    public void shouldFailThrowNullPointerException_removeValue(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+
+        try {
+            map.removeValue(null);
+        } catch(Exception e) {
+            assertTrue(e instanceof NullPointerException);
+            return;
+        }
+        fail();
     }
 }
