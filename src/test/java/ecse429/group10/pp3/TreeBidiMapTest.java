@@ -7,8 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -124,7 +123,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.06: Test for containsKey(key) showing the key is contained.
+     * Test 2.07: Test for containsKey(key) showing the key is contained.
      * Path through checkKey() and checkNonNullComparable() without throwing an exception,
      * then through lookupKey() and lookup() with the key being the last to be checked.
      */
@@ -784,5 +783,164 @@ public class TreeBidiMapTest {
             return;
         }
         fail();
+    }
+
+    /*
+     * Test 2.55: Test firstKey on empty input
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void shouldFailEmptyFirstKey() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        emptyMap.firstKey();
+    }
+
+    /*
+     * Test 2.56: Test firstKey on single element input
+     */
+    @Test
+    public void shouldReturnOneElementFirstKey() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1,"aaa");
+        assertEquals(1 , map.firstKey());
+    }
+
+    /*
+     * Test 2.57: Test firstKey on arbitrary size input
+     */
+    @Test
+    public void shouldReturnFirstKey() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertEquals(1 , map.firstKey());
+    }
+
+    /*
+     * Test 2.58: Test lastKey on empty input
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void shouldFailEmptyLastKey() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        emptyMap.lastKey();
+    }
+
+    /*
+     * Test 2.59: Test lastKey on single element input
+     */
+    @Test
+    public void shouldReturnOneElementLastKey() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1,"aaa");
+        assertEquals(1 , map.lastKey());
+    }
+
+    /*
+     * Test 2.60: Test lastKey on arbitrary size input
+     */
+    @Test
+    public void shouldReturnLastKey() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertEquals(7 , map.lastKey());
+    }
+
+    /*
+     * Test 2.61: Test nextKey on empty input
+     */
+    @Test
+    public void shouldReturnEmptyNextKey() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        assertEquals(null , emptyMap.nextKey(1));
+    }
+
+    /*
+     * Test 2.62: Test nextKey on single element input
+     */
+    @Test
+    public void shouldReturnOneElementNextKey() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1,"aaa");
+        assertEquals(null,map.nextKey(1));
+    }
+
+    /*
+     * Test 2.63: Test nextKey on arbitrary size input
+     */
+    @Test
+    public void shouldReturnNextKey() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertEquals(2 , map.nextKey(1));
+    }
+
+    /*
+     * Test 2.64: Test previousKey on empty input
+     */
+    @Test
+    public void shouldReturnEmptyPreviousKey() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        assertEquals(null , emptyMap.previousKey(1));
+
+    }
+
+    /*
+     * Test 2.65: Test previousKey on single element input
+     */
+    @Test
+    public void shouldReturnOneElementPreviousKey() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1,"aaa");
+        assertEquals(null,map.previousKey(1));
+    }
+
+    /*
+     * Test 2.66: Test previousKey on arbitrary size input
+     */
+    @Test
+    public void shouldReturnPreviousKey() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertEquals(1 , map.previousKey(2));
+    }
+
+    /*
+     * Test 2.67: test keySet on empty input
+     */
+    @Test
+    public void shouldReturnEmptykeySet() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        int[] expected = {};
+        int[] result = new int[map.keySet().size()];
+        int index = 0;
+        for(Object i : map.keySet()) {
+            result[index++] = (Integer) i;
+        }
+        assertArrayEquals(expected,result);
+    }
+
+    /*
+     * Test 2.68: test keySet on single element input
+     */
+    @Test
+    public void shouldReturnOneElementkeySet() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "aaa");
+        int[] expected = {1};
+        int[] result = new int[map.keySet().size()];
+        int index = 0;
+        for(Object i : map.keySet()) {
+            result[index++] = (Integer) i;
+        }
+        assertArrayEquals(expected,result);
+    }
+
+    /*
+     * Test 2.69: test keySet on arbitrary size input
+     */
+    @Test
+    public void shouldReturnNotEmptyKeySet() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int[] expected = {1,2,3,4,5,6,7};
+        int[] result = new int[map.keySet().size()];
+        int index = 0;
+        for(Object i : map.keySet()) {
+            result[index++] = (Integer) i;
+        }
+        assertArrayEquals(expected,result);
     }
 }
