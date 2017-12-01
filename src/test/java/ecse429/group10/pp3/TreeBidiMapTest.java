@@ -899,25 +899,25 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.67: test keySet on empty input
+     * Test 2.67: Test keySet on empty input
      */
     @Test
-    public void shouldReturnEmptykeySet() {
-        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+    public void shouldReturnEmptyKeySet() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
         int[] expected = {};
-        int[] result = new int[map.keySet().size()];
+        int[] result = new int[emptyMap.keySet().size()];
         int index = 0;
-        for(Object i : map.keySet()) {
+        for(Object i : emptyMap.keySet()) {
             result[index++] = (Integer) i;
         }
         assertArrayEquals(expected,result);
     }
 
     /*
-     * Test 2.68: test keySet on single element input
+     * Test 2.68: Test keySet on single element input
      */
     @Test
-    public void shouldReturnOneElementkeySet() {
+    public void shouldReturnOneElementKeySet() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
         map.put(1 , "aaa");
         int[] expected = {1};
@@ -930,7 +930,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.69: test keySet on arbitrary size input
+     * Test 2.69: Test keySet on arbitrary size input
      */
     @Test
     public void shouldReturnNotEmptyKeySet() {
@@ -942,5 +942,184 @@ public class TreeBidiMapTest {
             result[index++] = (Integer) i;
         }
         assertArrayEquals(expected,result);
+    }
+
+    /*
+     * Test 2.70: Test values on empty input
+     */
+    @Test
+    public void shouldReturnEmptyValues() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        String[] expected = {};
+        String[] result = new String[emptyMap.values().size()];
+        int index = 0;
+        for(Object i : emptyMap.values()) {
+            result[index++] = (String) i;
+        }
+        assertArrayEquals(expected,result);
+    }
+
+    /*
+     * Test 2.71: Test values on single element input
+     */
+    @Test
+    public void shouldReturnOneElementValues() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "aaa");
+        String[] expected = {"aaa"};
+        String[] result = new String[map.values().size()];
+        int index = 0;
+        for(Object i : map.values()) {
+            result[index++] = (String) i;
+        }
+        assertArrayEquals(expected,result);
+    }
+
+    /*
+     * Test 2.72: Test values on arbitrary size input
+     */
+    @Test
+    public void shouldReturnNotEmptyValues() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        String[] expected = {"aaa" , "bbb" , "ccc" , "ddd" , "eee" , "fff" , "ggg"};
+        String[] result = new String[map.values().size()];
+        int index = 0;
+        for(Object i : map.values()) {
+            result[index++] = (String) i;
+        }
+        assertArrayEquals(expected,result);
+    }
+
+
+    /*
+     * Test 2.73: Test inverseBidiMap on empty input
+     */
+    @Test
+    public void shouldReturnEmptyInverseBidiMap() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        assertEquals(expected , emptyMap.inverseBidiMap());
+    }
+
+    /*
+     * Test 2.74: Test inverseBidiMap on single element input
+     */
+    @Test
+    public void shouldReturnOneElementInverseBidiMap() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "aaa");
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        expected.put("aaa" , 1);
+
+        assertEquals(expected,map.inverseBidiMap());
+    }
+
+    /*
+     * Test 2.75: Test inverseBidiMap on arbitrary size input
+     */
+    @Test
+    public void shouldReturnNotEmptyInverseBidiMap() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        expected.put("aaa" , 1);
+        expected.put("bbb" , 2);
+        expected.put("ccc" , 3);
+        expected.put("ddd" , 4);
+        expected.put("eee" , 5);
+        expected.put("fff" , 6);
+        expected.put("ggg" , 7);
+        assertEquals(expected,map.inverseBidiMap());
+    }
+
+    /*
+     * Test 2.76: Test equals for empty input
+     */
+    @Test
+    public void shouldReturnEmptyEquals() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        assertEquals(true , emptyMap.equals(expected));
+    }
+
+    /*
+     * Test 2.77: Test equals for single element input
+     */
+    @Test
+    public void shouldReturnOneElementEquals() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "aaa");
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        expected.put(1 , "aaa");
+        assertEquals(true , map.equals(expected));
+    }
+
+    /*
+     * Test 2.78: Test equals for arbitrary size input
+     */
+    @Test
+    public void shouldReturnNotEmptyEquals() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        TreeBidiMap expected = new TreeBidiMap(hMap);
+        assertEquals(true , map.equals(expected));
+    }
+
+    /*
+     * Test 2.79: Test hashCode for empty input
+     */
+    @Test
+    public void shouldReturnEmptyHashCode() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        assertEquals(0 , emptyMap.hashCode());
+    }
+
+    /*
+     * Test 2.80: Test hashCode for single element input
+     */
+    @Test
+    public void shouldReturnOneElementHashCode() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "aaa");
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        expected.put(1 , "aaa");
+        assertEquals(expected.hashCode(), map.hashCode());
+    }
+
+    /*
+     * Test 2.81: Test hashCode for arbitrary size input
+     */
+    @Test
+    public void shouldReturnNotEmptyHashCode() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        TreeBidiMap expected = new TreeBidiMap(hMap);
+        assertEquals(expected.hashCode(), map.hashCode());
+    }
+
+    /*
+     * Test 2.82: Test toString for empty input
+     */
+    @Test
+    public void shouldReturnEmptyToString() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+    }
+
+    /*
+     * Test 2.83: Test toString for single element input
+     */
+    @Test
+    public void shouldReturnOneElementToString() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "aaa");
+        String expected = "{1=aaa}";
+        assertEquals(expected, map.toString());
+    }
+
+    /*
+     * Test 2.84: Test toString for arbitrary size input
+     */
+    @Test
+    public void shouldReturnNotEmptyToString() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        String expected = "{1=aaa, 2=bbb, 3=ccc, 4=ddd, 5=eee, 6=fff, 7=ggg}";
+        assertEquals(expected , map.toString());
     }
 }
