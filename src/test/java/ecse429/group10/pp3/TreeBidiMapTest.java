@@ -1122,4 +1122,36 @@ public class TreeBidiMapTest {
         String expected = "{1=aaa, 2=bbb, 3=ccc, 4=ddd, 5=eee, 6=fff, 7=ggg}";
         assertEquals(expected , map.toString());
     }
+
+    /*
+     * Test 2.85: Test entrySet for empty input
+     */
+    @Test
+    public void shouldReturnEmptyEntrySet() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        assertEquals(expected.entrySet() , emptyMap.entrySet());
+    }
+
+    /*
+     * Test 2.86: Test entrySet for single element input
+     */
+    @Test
+    public void shouldReturnOneElementEntrySet() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "aaa");
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        expected.put(1 , "aaa");
+        assertEquals(expected.entrySet() , map.entrySet());
+    }
+
+    /*
+     * Test 2.87: Test entrySet for arbitrary size input
+     */
+    @Test
+    public void shouldReturnNotEmptyEntrySet() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        TreeBidiMap expected = new TreeBidiMap(hMap);
+        assertEquals(expected.entrySet() , map.entrySet());
+    }
 }
