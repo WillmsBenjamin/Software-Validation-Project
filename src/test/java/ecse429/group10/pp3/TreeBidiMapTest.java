@@ -952,7 +952,7 @@ public class TreeBidiMapTest {
      * Test 2.71: Test keySet on arbitrary size input
      */
     @Test
-    public void shouldReturnNotEmptyKeySet() {
+    public void shouldReturnKeySet() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int[] expected = {1,2,3,4,5,6,7};
         int[] result = new int[map.keySet().size()];
@@ -998,7 +998,7 @@ public class TreeBidiMapTest {
      * Test 2.74: Test values on arbitrary size input
      */
     @Test
-    public void shouldReturnNotEmptyValues() {
+    public void shouldReturnValues() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         String[] expected = {"aaa" , "bbb" , "ccc" , "ddd" , "eee" , "fff" , "ggg"};
         String[] result = new String[map.values().size()];
@@ -1037,7 +1037,7 @@ public class TreeBidiMapTest {
      * Test 2.77: Test inverseBidiMap on arbitrary size input
      */
     @Test
-    public void shouldReturnNotEmptyInverseBidiMap() {
+    public void shouldReturnInverseBidiMap() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
         expected.put("aaa" , 1);
@@ -1076,7 +1076,7 @@ public class TreeBidiMapTest {
      * Test 2.80: Test equals for arbitrary size input
      */
     @Test
-    public void shouldReturnNotEmptyEquals() {
+    public void shouldReturnEquals() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         TreeBidiMap expected = new TreeBidiMap(hMap);
         assertEquals(true , map.equals(expected));
@@ -1107,7 +1107,7 @@ public class TreeBidiMapTest {
      * Test 2.83: Test hashCode for arbitrary size input
      */
     @Test
-    public void shouldReturnNotEmptyHashCode() {
+    public void shouldReturnHashCode() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         TreeBidiMap expected = new TreeBidiMap(hMap);
         assertEquals(expected.hashCode(), map.hashCode());
@@ -1138,7 +1138,7 @@ public class TreeBidiMapTest {
      * Test 2.86: Test toString for arbitrary size input
      */
     @Test
-    public void shouldReturnNotEmptyToString() {
+    public void shouldReturnToString() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         String expected = "{1=aaa, 2=bbb, 3=ccc, 4=ddd, 5=eee, 6=fff, 7=ggg}";
         assertEquals(expected , map.toString());
@@ -1170,7 +1170,7 @@ public class TreeBidiMapTest {
      * Test 2.89: Test entrySet for arbitrary size input
      */
     @Test
-    public void shouldReturnNotEmptyEntrySet() {
+    public void shouldReturnEntrySet() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         TreeBidiMap expected = new TreeBidiMap(hMap);
         assertEquals(expected.entrySet() , map.entrySet());
