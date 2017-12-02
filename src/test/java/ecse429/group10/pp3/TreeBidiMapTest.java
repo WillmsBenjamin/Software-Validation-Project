@@ -851,7 +851,16 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.62: Test nextKey on single element input
+     * Test 2.62: Test nextKey(key) on empty input with null key
+     */
+    @Test(expected = NullPointerException.class)
+    public void shouldFailReturnEmptyNextKey() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        emptyMap.nextKey(null);
+    }
+
+    /*
+     * Test 2.63: Test nextKey on single element input
      */
     @Test
     public void shouldReturnOneElementNextKey() {
@@ -861,7 +870,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.63: Test nextKey on arbitrary size input
+     * Test 2.64: Test nextKey on arbitrary size input
      */
     @Test
     public void shouldReturnNextKey() {
@@ -870,7 +879,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.64: Test previousKey on empty input
+     * Test 2.65: Test previousKey on empty input
      */
     @Test
     public void shouldReturnEmptyPreviousKey() {
@@ -880,7 +889,17 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.65: Test previousKey on single element input
+     * Test 2.66: Test previousKey on empty input with null key
+     */
+    @Test(expected = NullPointerException.class)
+    public void shouldFailEmptyPreviousKey() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        emptyMap.previousKey(null);
+
+    }
+
+    /*
+     * Test 2.67: Test previousKey on single element input
      */
     @Test
     public void shouldReturnOneElementPreviousKey() {
@@ -890,7 +909,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.66: Test previousKey on arbitrary size input
+     * Test 2.68: Test previousKey on arbitrary size input
      */
     @Test
     public void shouldReturnPreviousKey() {
@@ -899,7 +918,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.67: Test keySet on empty input
+     * Test 2.69: Test keySet on empty input
      */
     @Test
     public void shouldReturnEmptyKeySet() {
@@ -914,7 +933,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.68: Test keySet on single element input
+     * Test 2.70: Test keySet on single element input
      */
     @Test
     public void shouldReturnOneElementKeySet() {
@@ -930,7 +949,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.69: Test keySet on arbitrary size input
+     * Test 2.71: Test keySet on arbitrary size input
      */
     @Test
     public void shouldReturnNotEmptyKeySet() {
@@ -945,7 +964,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.70: Test values on empty input
+     * Test 2.72: Test values on empty input
      */
     @Test
     public void shouldReturnEmptyValues() {
@@ -960,7 +979,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.71: Test values on single element input
+     * Test 2.73: Test values on single element input
      */
     @Test
     public void shouldReturnOneElementValues() {
@@ -976,7 +995,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.72: Test values on arbitrary size input
+     * Test 2.74: Test values on arbitrary size input
      */
     @Test
     public void shouldReturnNotEmptyValues() {
@@ -992,7 +1011,7 @@ public class TreeBidiMapTest {
 
 
     /*
-     * Test 2.73: Test inverseBidiMap on empty input
+     * Test 2.75: Test inverseBidiMap on empty input
      */
     @Test
     public void shouldReturnEmptyInverseBidiMap() {
@@ -1002,7 +1021,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.74: Test inverseBidiMap on single element input
+     * Test 2.76: Test inverseBidiMap on single element input
      */
     @Test
     public void shouldReturnOneElementInverseBidiMap() {
@@ -1015,7 +1034,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.75: Test inverseBidiMap on arbitrary size input
+     * Test 2.77: Test inverseBidiMap on arbitrary size input
      */
     @Test
     public void shouldReturnNotEmptyInverseBidiMap() {
@@ -1032,7 +1051,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.76: Test equals for empty input
+     * Test 2.78: Test equals for empty input
      */
     @Test
     public void shouldReturnEmptyEquals() {
@@ -1042,7 +1061,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.77: Test equals for single element input
+     * Test 2.79: Test equals for single element input
      */
     @Test
     public void shouldReturnOneElementEquals() {
@@ -1054,7 +1073,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.78: Test equals for arbitrary size input
+     * Test 2.80: Test equals for arbitrary size input
      */
     @Test
     public void shouldReturnNotEmptyEquals() {
@@ -1064,7 +1083,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.79: Test hashCode for empty input
+     * Test 2.81: Test hashCode for empty input
      */
     @Test
     public void shouldReturnEmptyHashCode() {
@@ -1073,7 +1092,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.80: Test hashCode for single element input
+     * Test 2.82: Test hashCode for single element input
      */
     @Test
     public void shouldReturnOneElementHashCode() {
@@ -1085,7 +1104,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.81: Test hashCode for arbitrary size input
+     * Test 2.83: Test hashCode for arbitrary size input
      */
     @Test
     public void shouldReturnNotEmptyHashCode() {
@@ -1095,7 +1114,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.82: Test toString for empty input
+     * Test 2.84: Test toString for empty input
      */
     @Test
     public void shouldReturnEmptyToString() {
@@ -1105,7 +1124,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.83: Test toString for single element input
+     * Test 2.85: Test toString for single element input
      */
     @Test
     public void shouldReturnOneElementToString() {
@@ -1116,7 +1135,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.84: Test toString for arbitrary size input
+     * Test 2.86: Test toString for arbitrary size input
      */
     @Test
     public void shouldReturnNotEmptyToString() {
@@ -1126,7 +1145,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.85: Test entrySet for empty input
+     * Test 2.87: Test entrySet for empty input
      */
     @Test
     public void shouldReturnEmptyEntrySet() {
@@ -1136,7 +1155,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.86: Test entrySet for single element input
+     * Test 2.88: Test entrySet for single element input
      */
     @Test
     public void shouldReturnOneElementEntrySet() {
@@ -1148,7 +1167,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.87: Test entrySet for arbitrary size input
+     * Test 2.89: Test entrySet for arbitrary size input
      */
     @Test
     public void shouldReturnNotEmptyEntrySet() {
