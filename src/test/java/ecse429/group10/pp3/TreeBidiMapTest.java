@@ -1100,6 +1100,8 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnEmptyToString() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        String expected = "{}";
+        assertEquals(expected , emptyMap.toString());
     }
 
     /*
