@@ -1229,12 +1229,12 @@ public class TreeBidiMapTest {
     public void shouldReturnProperInverseSize(){
     	TreeBidiMap map = new TreeBidiMap(hMap);
     	OrderedBidiMap inverse =  map.inverseBidiMap();
-    	assertEquals(map.size(), inverse.size());
+    	assertEquals(7, inverse.size());
     	
     }
     
     /*
-     * Test 2.95: InverseBidiMap element check 
+     * Test 2.95: InverseBidiMap element order check 
      */
     @Test
     public void shouldReturnProperInverseElementOrder(){
@@ -1252,7 +1252,19 @@ public class TreeBidiMapTest {
     public void shouldReturnProperInverseEmptySize(){
     	TreeBidiMap map = new TreeBidiMap(new HashedMap());
     	OrderedBidiMap inverse =  map.inverseBidiMap();
-    	assertEquals(map.size(), inverse.size());
+    	assertEquals(0, inverse.size());
+    	
+    }
+    
+    /*
+     * Test 2.97: InverseBidiMap with one element 
+     */
+    @Test
+    public void shouldReturnProperInverseOneElementSize(){
+    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
+    	map.put("A" , "B");
+    	OrderedBidiMap inverse =  map.inverseBidiMap();
+    	assertEquals(1, inverse.size());
     	
     }
     
