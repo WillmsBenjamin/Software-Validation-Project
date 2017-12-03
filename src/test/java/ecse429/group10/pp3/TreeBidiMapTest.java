@@ -1182,7 +1182,7 @@ public class TreeBidiMapTest {
      * Test 2.90: MapIterator test on empty set
      */
     @Test
-    public void testOnEmptySet(){
+    public void shouldReturnFalseOnEmptySet(){
     	TreeBidiMap map = new TreeBidiMap(new HashedMap());
     	MapIterator it = map.mapIterator();
         assertFalse(it.hasNext());
@@ -1193,7 +1193,7 @@ public class TreeBidiMapTest {
      * Test 2.91: MapIterator test on single element
      */
     @Test
-    public void testOneElementInSet(){
+    public void shouldReturnTrueOneElementInSet(){
     	TreeBidiMap map = new TreeBidiMap(new HashedMap());
         map.put(1 , "test");
         MapIterator it = map.mapIterator();
@@ -1201,6 +1201,23 @@ public class TreeBidiMapTest {
     	
     }
     
+    /*
+     * Test 2.92:  MapIterator test data return type
+     */
+    public void shouldReturnTrueOnIteratorTypeFullSet(){
+    	TreeBidiMap map = new TreeBidiMap(hMap);
+    	MapIterator it = map.mapIterator();
+    	assertTrue(it instanceof OrderedMapIterator);
+    }
+    
+    /*
+     * Test 2.93:  MapIterator test data return type
+     */
+    public void shouldReturnTrueOnIteratorTypeEmptySet(){
+    	TreeBidiMap map = new TreeBidiMap(hMap);
+    	MapIterator it = map.mapIterator();
+    	assertTrue(it instanceof EmptyOrderedMapIterator);
+    }
    
     
   
