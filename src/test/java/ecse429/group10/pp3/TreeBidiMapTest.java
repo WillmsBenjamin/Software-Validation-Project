@@ -1,6 +1,7 @@
 package ecse429.group10.pp3;
 
 import org.apache.commons.collections4.MapIterator;
+import org.apache.commons.collections4.OrderedBidiMap;
 import org.apache.commons.collections4.OrderedMapIterator;
 import org.apache.commons.collections4.bidimap.TreeBidiMap;
 import org.apache.commons.collections4.iterators.EmptyOrderedMapIterator;
@@ -1219,6 +1220,17 @@ public class TreeBidiMapTest {
     	TreeBidiMap map = new TreeBidiMap(new HashedMap());
     	MapIterator it = map.mapIterator();
     	assertTrue(it instanceof EmptyOrderedMapIterator);
+    }
+    
+    /*
+     * Test 2.94:  InverseBidiMap size test
+     */
+    @Test
+    public void shouldReturnTrueInverseSize(){
+    	TreeBidiMap map = new TreeBidiMap(hMap);
+    	OrderedBidiMap inverse =  map.inverseBidiMap();
+    	assertEquals(map.size(), inverse.size());
+    	
     }
    
     
