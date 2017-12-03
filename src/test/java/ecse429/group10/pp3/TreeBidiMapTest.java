@@ -1203,7 +1203,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.92:  MapIterator test data return type
+     * Test 2.92:  MapIterator test data return type with populated set 
      */
     @Test
     public void shouldReturnTrueOnIteratorTypeFullSet(){
@@ -1213,7 +1213,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.93:  MapIterator test data return type
+     * Test 2.93:  MapIterator test data return type with empty set 
      */
     @Test
     public void shouldReturnTrueOnIteratorTypeEmptySet(){
