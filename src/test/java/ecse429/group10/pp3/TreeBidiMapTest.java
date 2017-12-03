@@ -1245,5 +1245,16 @@ public class TreeBidiMapTest {
     	
     }
     
+    /*
+     * Test 2.96: InverseBidiMap with empty set 
+     */
+    @Test
+    public void shouldReturnProperInverseEmptySize(){
+    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
+    	OrderedBidiMap inverse =  map.inverseBidiMap();
+    	assertEquals(map.size(), inverse.size());
+    	
+    }
+    
   
 }
