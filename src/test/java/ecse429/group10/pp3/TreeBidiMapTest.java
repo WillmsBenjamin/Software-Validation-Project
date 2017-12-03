@@ -1204,6 +1204,7 @@ public class TreeBidiMapTest {
     /*
      * Test 2.92:  MapIterator test data return type
      */
+    @Test
     public void shouldReturnTrueOnIteratorTypeFullSet(){
     	TreeBidiMap map = new TreeBidiMap(hMap);
     	MapIterator it = map.mapIterator();
@@ -1213,8 +1214,9 @@ public class TreeBidiMapTest {
     /*
      * Test 2.93:  MapIterator test data return type
      */
+    @Test
     public void shouldReturnTrueOnIteratorTypeEmptySet(){
-    	TreeBidiMap map = new TreeBidiMap(hMap);
+    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
     	MapIterator it = map.mapIterator();
     	assertTrue(it instanceof EmptyOrderedMapIterator);
     }
