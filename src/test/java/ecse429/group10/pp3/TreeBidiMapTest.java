@@ -1226,13 +1226,24 @@ public class TreeBidiMapTest {
      * Test 2.94:  InverseBidiMap size test
      */
     @Test
-    public void shouldReturnTrueInverseSize(){
+    public void shouldReturnProperInverseSize(){
     	TreeBidiMap map = new TreeBidiMap(hMap);
     	OrderedBidiMap inverse =  map.inverseBidiMap();
     	assertEquals(map.size(), inverse.size());
     	
     }
-   
+    
+    /*
+     * Test 2.95: InverseBidiMap element check 
+     */
+    @Test
+    public void shouldReturnProperInverseElementOrder(){
+    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put("A" , "B");
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+    	assertEquals("A" , inverse.get("B"));
+    	
+    }
     
   
 }
