@@ -1181,11 +1181,12 @@ public class TreeBidiMapTest {
      */
     @Test
     public void testOnEmptySet(){
-    	Boolean check = false;
     	TreeBidiMap map = new TreeBidiMap(new HashedMap());
     	MapIterator<K, V> it = map.mapIterator();
-    	assertEquals(check,it.hasNext());
+        assertFalse(it.hasNext());
     	
     }
+   
+    
   
 }
