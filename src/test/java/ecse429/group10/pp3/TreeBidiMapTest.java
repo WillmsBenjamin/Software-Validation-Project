@@ -2,6 +2,7 @@ package ecse429.group10.pp3;
 
 import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.bidimap.TreeBidiMap;
+import org.apache.commons.collections4.iterators.EmptyOrderedMapIterator;
 import org.apache.commons.collections4.map.HashedMap;
 import org.junit.After;
 import org.junit.Before;
@@ -1183,7 +1184,19 @@ public class TreeBidiMapTest {
     public void testOnEmptySet(){
     	TreeBidiMap map = new TreeBidiMap(new HashedMap());
     	MapIterator<K, V> it = map.mapIterator();
-        assertFalse(it.hasNext());
+        assertTrue(it.hasNext() instanceof EmptyOrderedMapIterator);
+    	
+    }
+    
+    /*
+     * Test 2.91: MapIterator test on single element
+     */
+    @Test
+    public void testOneElementInSet(){
+    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "test");
+        MapIterator<K, V> it = map.mapIterator();
+        assertTrue(it.hasNext() instanceof OrderedMapIterator);
     	
     }
    
