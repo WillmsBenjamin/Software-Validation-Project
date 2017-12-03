@@ -1,8 +1,8 @@
 package ecse429.group10.pp3;
 
+import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.bidimap.TreeBidiMap;
 import org.apache.commons.collections4.map.HashedMap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -1175,4 +1175,17 @@ public class TreeBidiMapTest {
         TreeBidiMap expected = new TreeBidiMap(hMap);
         assertEquals(expected.entrySet() , map.entrySet());
     }
+    
+    /*
+     * Test 2.90: MapIterator test on empty set
+     */
+    @Test
+    public void testOnEmptySet(){
+    	Boolean check = false;
+    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
+    	MapIterator<K, V> it = map.mapIterator();
+    	assertEquals(check,it.hasNext());
+    	
+    }
+  
 }
