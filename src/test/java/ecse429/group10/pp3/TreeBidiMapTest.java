@@ -1346,6 +1346,82 @@ public class TreeBidiMapTest {
         }
         fail();
     }
+    
+    /*
+     * Test 2.105: Test for isEmpty() with map size = 0 for inverseBidimap.
+     */
+    @Test
+    public void shouldReturnMapIsEmptyInverse() {
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        assertTrue(inverse.isEmpty());
+    }
+
+    /*
+     * Test 2.106: Test for isEmpty() with map size != 0 for inverseBidimap.
+     */
+    @Test
+    public void shouldReturnMapIsNotEmptyInverse() {
+        TreeBidiMap nonEmptyMap = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  nonEmptyMap.inverseBidiMap();
+        assertFalse(inverse.isEmpty());
+    }
+    
+    /*
+     * Test 2.107: Test for new EntrySet with empty map for inverseBidimap
+     */
+    @Test
+    public void shouldReturnNewEntrySetInverse(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        Set<TreeBidiMap.Entry> returnedSet = inverse.entrySet();
+        assertNotNull(returnedSet);
+        assertEquals(0, returnedSet.size());
+
+    }
+
+    /*
+     * Test 2.108: Test for retrieval of EntrySet with nonempty map for inverseBididmap
+     */
+    @Test
+    public void shouldReturnEntryViewInverse(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        Set<TreeBidiMap.Entry> returnedSet = inverse.entrySet();
+        assertNotNull(returnedSet);
+        assertEquals( 7, returnedSet.size());
+    }
+    
+    /*
+     * Test 2.109: Test firstKey on empty input for inverseBididmap
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void shouldFailEmptyFirstKeyInverse() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        inverse.firstKey();
+    }
+
+    /*
+     * Test 2.110: Test firstKey on single element input for inverseBididmap
+     */
+    @Test
+    public void shouldReturnOneElementFirstKeyInverse() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1,"aaa");
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertEquals("aaa", inverse.firstKey());
+    }
+
+    /*
+     * Test 2.111: Test firstKey on arbitrary size input for inverseBididmap
+     */
+    @Test
+    public void shouldReturnFirstKeyInverse() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertEquals("aaa" , inverse.firstKey());
+    }
 
   
 }
