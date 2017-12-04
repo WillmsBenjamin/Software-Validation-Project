@@ -1637,6 +1637,143 @@ public class TreeBidiMapTest {
         OrderedBidiMap inverse =  map.inverseBidiMap();
         assertEquals("aaa" , inverse.previousKey("bbb"));
     }
+    
+    /*
+     * Test 2.131: Test put of one element in empty TreeBidiMap for inverseBididmap
+     */
+    @Test
+    public void shouldIncreaseSizeToOneInverse(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        emptyMap.put(1, "new");
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        assertFalse(inverse.isEmpty());
+        assertTrue(inverse.containsKey("new"));
+        assertTrue(inverse.containsValue(1));
+        assertEquals( 1, inverse.size());
+    }
+
+    /*
+     * Test 2.132: Test put of one element in nonempty TreeBidiMap for inverseBididmap
+     */
+    @Test
+    public void shouldIncreaseSizeByOneInverse(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        map.put(9, "new");
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertFalse(inverse.isEmpty());
+        assertTrue(inverse.containsKey("new"));
+        assertTrue(inverse.containsValue(9));
+        assertEquals( prev_size+1 , inverse.size());
+    }
+
+    /*
+     * Test 2.133: Test put of one element with existing key in nonempty TreeBidiMap for inverseBididmap
+     */
+    @Test
+    public void shouldReplaceExistingValueInverse(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        int prev_size = map.size();
+        map.put(1, "new");
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertFalse(inverse.isEmpty());
+        assertTrue(inverse.containsKey("new"));
+        assertTrue(inverse.containsValue(1));
+        assertEquals( prev_size , inverse.size());
+        assertEquals(1, inverse.get("new"));
+        assertEquals("new", inverse.getKey(1));
+    }
+
+
+    /*
+     * Test 2.134: Test put of one element with key of invalid type for inverseBididmap
+     */
+    @Test
+    public void shouldFailThrowClassCastExceptionInverse_put(){
+        TreeBidiMap map = new TreeBidiMap();
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        int[] array = new int[5];
+        try {
+            inverse.put(array, "new");
+        } catch(Exception e) {
+            assertTrue(e instanceof ClassCastException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.135: Test put of one element with null key for inverseBididmap
+     */
+    @Test
+    public void shouldFailThrowNullPointerExceptionInverse_put(){
+        TreeBidiMap map = new TreeBidiMap();
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        try {
+        	inverse.put(null, "new");
+        } catch(Exception e) {
+            assertTrue(e instanceof NullPointerException);
+            return;
+        }
+        fail();
+    }
+    
+    /*
+     * Test 2.136: Test for toString() with map size = 0 for inverseBididmap
+     */
+    @Test
+    public void shouldReturnEmptyBracesAsStringInverse() {
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        assertEquals("{}", inverse.toString());
+    }
+
+    /*
+     * Test 2.137: Test for toString() with map size != 0 for inverseBididmap
+     */
+    @Test
+    public void shouldReturnMapInBracesAsStringInverse() {
+        TreeBidiMap nonEmptyMap = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  nonEmptyMap.inverseBidiMap();
+        assertEquals("{aaa=1, bbb=2, ccc=3, ddd=4, eee=5, fff=6, ggg=7}", inverse.toString());
+    }
+    
+    /*
+     * Test 2.138: Test values on empty input for inverseBididmap
+     */
+    @Test
+    public void shouldReturnEmptyValuesInverse() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        String[] expected = {};
+        String[] result = new String[inverse.values().size()];
+        int index = 0;
+        for(Object i : inverse.values()) {
+            result[index++] = (String) i;
+        }
+        assertArrayEquals(expected,result);
+    }
+
+    /*
+     * Test 2.139: Test values on single element input for inverseBididmap
+     */
+    @Test
+    public void shouldReturnOneElementValuesInverse() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put("bbb" , "aaa");
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        String[] expected = {"bbb"};
+        String[] result = new String[inverse.values().size()];
+        int index = 0;
+        for(Object i : inverse.values()) {
+            result[index++] = (String) i;
+        }
+        assertArrayEquals(expected,result);
+    }
+
+  
+
+
 
 
   
