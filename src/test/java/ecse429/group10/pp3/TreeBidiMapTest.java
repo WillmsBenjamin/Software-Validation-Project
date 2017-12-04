@@ -1268,5 +1268,84 @@ public class TreeBidiMapTest {
     	
     }
     
+    /*
+     * Test 2.98: InverseBidi Map with clear 
+     */
+    @Test
+    public void shouldClearInverseBidiMap(){
+    TreeBidiMap clearableMap = new TreeBidiMap(hMap);
+    OrderedBidiMap inverse =  clearableMap.inverseBidiMap();
+    assertEquals(7, inverse.size());
+    inverse.clear();
+    assertEquals(0, inverse.size());
+    }
+    
+    /*
+     * Test 2.99: Test for containsKey(key) in inverse BidiMap.
+      */
+    @Test
+    public void shouldReturnKeyIsContainedFirstInverse() {
+        TreeBidiMap clearableMap = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  clearableMap.inverseBidiMap();
+        assertTrue(inverse.containsKey("aaa"));
+    }
+    
+    /*
+     * Test 2.100: Test for containsKey(key) in inverse BidiMap.
+      */
+    @Test
+    public void shouldReturnKeyIsNotContainedInverse() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertFalse(inverse.containsKey("zzz"));
+    }
+    
+    /*
+     * Test 2.101: Test for containsValue(value) showing the value is contained in inverse bidimap.
+     
+     */
+    @Test
+    public void shouldReturnValueIsContainedFirstInverse() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertTrue(inverse.containsValue(1));
+    }
+
+    /*
+     * Test 2.102: Test for containsValue(value) showing the value is contained in inverse bidimap.
+     */
+    @Test
+    public void shouldReturnValueIsContainedLastInverse() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertTrue(inverse.containsValue(7));
+    }
+
+    /*
+     * Test 2.103: Test for containsValue(value) showing the value is not contained in inverse bidimap.
+     */
+    @Test
+    public void shouldReturnValueIsNotContainedInverse() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertFalse(inverse.containsValue(60));
+    }
+
+    /*
+     * Test 2.104: Test for containsValue(value) with null input in inverse bidimap.
+     */
+    @Test
+    public void shouldFailContainsValueWithNullPointerExceptionInverse() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        try {
+            inverse.containsValue(null);
+        } catch(Exception e) {
+            assertTrue(e instanceof NullPointerException);
+            return;
+        }
+        fail();
+    }
+
   
 }
