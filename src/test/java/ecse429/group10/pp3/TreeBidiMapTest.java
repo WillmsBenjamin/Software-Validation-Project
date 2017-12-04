@@ -1422,6 +1422,138 @@ public class TreeBidiMapTest {
         OrderedBidiMap inverse =  map.inverseBidiMap();
         assertEquals("aaa" , inverse.firstKey());
     }
+    
+    /*
+     * Test 2.112: Test get(key) with empty map for inverseBididmap
+     */
+    @Test
+    public void shouldReturnNullKeyNotPresentTreeEmptyInverse(){
+        TreeBidiMap emptyMap = new TreeBidiMap();
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        assertNull(inverse.get(1));
+    }
+
+    /*
+     * Test 2.113: Test get(key) with value present in nonempty map for inverseBididmap
+     */
+    @Test
+    public void shouldReturnValueFromKeyInverse(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertEquals(1, inverse.get("aaa"));
+    }
+
+    /*
+     * Test 2.114: Test get(key) with value not present in nonempty map for inverseBididmap
+     */
+    @Test
+    public void shouldReturnNullKeyNotPresentInverse(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertNull(inverse.get("xxx"));
+    }
+
+    /*
+     * Test 2.115: Test get(key) with non comparable key for inverseBididmap
+     */
+    @Test
+    public void shouldThrowClassCastExceptionKeyWrongTypeInverse_get(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        int[] array = new int[5];
+        try {
+            inverse.get(array);
+        } catch(Exception e) {
+            assertTrue(e instanceof ClassCastException);
+            return;
+        }
+        fail();
+    }
+
+    /*
+     * Test 2.116: Test get(key) with null key for inverseBididmap
+     */
+    @Test
+    public void shouldThrowClassCastExceptionKeyNullInverse_get(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        try {
+        	inverse.get(null);
+        } catch(Exception e) {
+            assertTrue(e instanceof NullPointerException);
+            return;
+        }
+        fail();
+    }
+    
+
+    /*
+     * Test 2.117: Test hashCode for empty input for inverseBididmap
+     */
+    @Test
+    public void shouldReturnEmptyHashCodeInverse() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        assertEquals(0 , inverse.hashCode());
+    }
+
+    /*
+     * Test 2.118: Test hashCode for single element input for inverseBididmap
+     */
+    @Test
+    public void shouldReturnOneElementHashCodeInverse() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1 , "aaa");
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        TreeBidiMap expected = new TreeBidiMap(new HashedMap());
+        expected.put(1 , "aaa");
+        OrderedBidiMap inverseExpected =  expected.inverseBidiMap();
+        assertEquals(inverseExpected.hashCode(), inverse.hashCode());
+    }
+
+    /*
+     * Test 2.119: Test hashCode for arbitrary size input for inverseBididmap
+     */
+    @Test
+    public void shouldReturnHashCodeInverse() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        TreeBidiMap expected = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverseExpected =  expected.inverseBidiMap();
+        assertEquals(inverseExpected.hashCode(), inverse.hashCode());
+    }
+    
+    /*
+     * Test 2.120: Test lastKey on empty input for inverseBididmap
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void shouldFailEmptyLastKeyInverse() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        inverse.lastKey();
+    }
+
+    /*
+     * Test 2.121: Test lastKey on single element input for inverseBididmap
+     */
+    @Test
+    public void shouldReturnOneElementLastKeyInverse() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1,"aaa");
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertEquals("aaa" , inverse.lastKey());
+    }
+
+    /*
+     * Test 2.122: Test lastKey on arbitrary size input for inverseBididmap for inverseBididmap
+     */
+    @Test
+    public void shouldReturnLastKeyInverse() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse =  map.inverseBidiMap();
+        assertEquals("ggg" , inverse.lastKey());
+    }
+
 
   
 }
