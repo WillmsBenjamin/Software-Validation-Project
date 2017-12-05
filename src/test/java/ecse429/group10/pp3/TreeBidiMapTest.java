@@ -1117,38 +1117,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.84: Test toString for empty input
-     */
-    @Test
-    public void shouldReturnEmptyToString() {
-        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        String expected = "{}";
-        assertEquals(expected , emptyMap.toString());
-    }
-
-    /*
-     * Test 2.85: Test toString for single element input
-     */
-    @Test
-    public void shouldReturnOneElementToString() {
-        TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "aaa");
-        String expected = "{1=aaa}";
-        assertEquals(expected, map.toString());
-    }
-
-    /*
-     * Test 2.86: Test toString for arbitrary size input
-     */
-    @Test
-    public void shouldReturnToString() {
-        TreeBidiMap map = new TreeBidiMap(hMap);
-        String expected = "{1=aaa, 2=bbb, 3=ccc, 4=ddd, 5=eee, 6=fff, 7=ggg}";
-        assertEquals(expected , map.toString());
-    }
-
-    /*
-     * Test 2.87: Test entrySet for empty input
+     * Test 2.84: Test entrySet for empty input
      */
     @Test
     public void shouldReturnEmptyEntrySet() {
@@ -1158,7 +1127,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.88: Test entrySet for single element input
+     * Test 2.85: Test entrySet for single element input
      */
     @Test
     public void shouldReturnOneElementEntrySet() {
@@ -1170,7 +1139,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.89: Test entrySet for arbitrary size input
+     * Test 2.86: Test entrySet for arbitrary size input
      */
     @Test
     public void shouldReturnEntrySet() {
@@ -1180,7 +1149,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.90: MapIterator test on empty set
+     * Test 2.87: MapIterator test on empty set
      */
     @Test
     public void shouldReturnFalseOnEmptySet(){
@@ -1191,7 +1160,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.91: MapIterator test on single element
+     * Test 2.88: MapIterator test on single element
      */
     @Test
     public void shouldReturnTrueOneElementInSet(){
@@ -1203,7 +1172,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.92:  MapIterator test data return type with populated set 
+     * Test 2.89:  MapIterator test data return type with populated set
      */
     @Test
     public void shouldReturnTrueOnIteratorTypeFullSet(){
@@ -1213,7 +1182,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.93:  MapIterator test data return type with empty set 
+     * Test 2.90:  MapIterator test data return type with empty set
      */
     @Test
     public void shouldReturnTrueOnIteratorTypeEmptySet(){
@@ -1223,7 +1192,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.94:  InverseBidiMap size test
+     * Test 2.91:  InverseBidiMap size test
      */
     @Test
     public void shouldReturnProperInverseSize(){
@@ -1234,7 +1203,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.95: InverseBidiMap element order check 
+     * Test 2.92: InverseBidiMap element order check
      */
     @Test
     public void shouldReturnProperInverseElementOrder(){
@@ -1246,7 +1215,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.96: InverseBidiMap with empty set 
+     * Test 2.93: InverseBidiMap with empty set
      */
     @Test
     public void shouldReturnProperInverseEmptySize(){
@@ -1257,7 +1226,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.97: InverseBidiMap with one element 
+     * Test 2.94: InverseBidiMap with one element
      */
     @Test
     public void shouldReturnProperInverseOneElementSize(){
@@ -1269,7 +1238,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.98: InverseBidi Map with clear 
+     * Test 2.95: InverseBidi Map with clear
      */
     @Test
     public void shouldClearInverseBidiMap(){
@@ -1281,7 +1250,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.99: Test for containsKey(key) in inverse BidiMap.
+     * Test 2.96: Test for containsKey(key) in inverse BidiMap.
       */
     @Test
     public void shouldReturnKeyIsContainedFirstInverse() {
@@ -1291,7 +1260,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.100: Test for containsKey(key) in inverse BidiMap.
+     * Test 2.97: Test for containsKey(key) in inverse BidiMap.
       */
     @Test
     public void shouldReturnKeyIsNotContainedInverse() {
@@ -1301,7 +1270,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.101: Test for containsValue(value) showing the value is contained in inverse bidimap.
+     * Test 2.98: Test for containsValue(value) showing the value is contained in inverse bidimap.
      
      */
     @Test
@@ -1312,7 +1281,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.102: Test for containsValue(value) showing the value is contained in inverse bidimap.
+     * Test 2.99: Test for containsValue(value) showing the value is contained in inverse bidimap.
      */
     @Test
     public void shouldReturnValueIsContainedLastInverse() {
@@ -1322,7 +1291,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.103: Test for containsValue(value) showing the value is not contained in inverse bidimap.
+     * Test 2.100: Test for containsValue(value) showing the value is not contained in inverse bidimap.
      */
     @Test
     public void shouldReturnValueIsNotContainedInverse() {
@@ -1332,7 +1301,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.104: Test for containsValue(value) with null input in inverse bidimap.
+     * Test 2.101: Test for containsValue(value) with null input in inverse bidimap.
      */
     @Test
     public void shouldFailContainsValueWithNullPointerExceptionInverse() {
@@ -1348,7 +1317,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.105: Test for isEmpty() with map size = 0 for inverseBidimap.
+     * Test 2.102: Test for isEmpty() with map size = 0 for inverseBidimap.
      */
     @Test
     public void shouldReturnMapIsEmptyInverse() {
@@ -1358,7 +1327,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.106: Test for isEmpty() with map size != 0 for inverseBidimap.
+     * Test 2.103: Test for isEmpty() with map size != 0 for inverseBidimap.
      */
     @Test
     public void shouldReturnMapIsNotEmptyInverse() {
@@ -1368,7 +1337,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.107: Test for new EntrySet with empty map for inverseBidimap
+     * Test 2.104: Test for new EntrySet with empty map for inverseBidimap
      */
     @Test
     public void shouldReturnNewEntrySetInverse(){
@@ -1381,7 +1350,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.108: Test for retrieval of EntrySet with nonempty map for inverseBididmap
+     * Test 2.105: Test for retrieval of EntrySet with nonempty map for inverseBididmap
      */
     @Test
     public void shouldReturnEntryViewInverse(){
@@ -1393,7 +1362,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.109: Test firstKey on empty input for inverseBididmap
+     * Test 2.106: Test firstKey on empty input for inverseBididmap
      */
     @Test(expected = NoSuchElementException.class)
     public void shouldFailEmptyFirstKeyInverse() {
@@ -1403,7 +1372,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.110: Test firstKey on single element input for inverseBididmap
+     * Test 2.107: Test firstKey on single element input for inverseBididmap
      */
     @Test
     public void shouldReturnOneElementFirstKeyInverse() {
@@ -1414,7 +1383,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.111: Test firstKey on arbitrary size input for inverseBididmap
+     * Test 2.108: Test firstKey on arbitrary size input for inverseBididmap
      */
     @Test
     public void shouldReturnFirstKeyInverse() {
@@ -1424,7 +1393,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.112: Test get(key) with empty map for inverseBididmap
+     * Test 2.109: Test get(key) with empty map for inverseBididmap
      */
     @Test
     public void shouldReturnNullKeyNotPresentTreeEmptyInverse(){
@@ -1434,7 +1403,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.113: Test get(key) with value present in nonempty map for inverseBididmap
+     * Test 2.110: Test get(key) with value present in nonempty map for inverseBididmap
      */
     @Test
     public void shouldReturnValueFromKeyInverse(){
@@ -1444,7 +1413,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.114: Test get(key) with value not present in nonempty map for inverseBididmap
+     * Test 2.111: Test get(key) with value not present in nonempty map for inverseBididmap
      */
     @Test
     public void shouldReturnNullKeyNotPresentInverse(){
@@ -1454,7 +1423,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.115: Test get(key) with non comparable key for inverseBididmap
+     * Test 2.112: Test get(key) with non comparable key for inverseBididmap
      */
     @Test
     public void shouldThrowClassCastExceptionKeyWrongTypeInverse_get(){
@@ -1471,7 +1440,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.116: Test get(key) with null key for inverseBididmap
+     * Test 2.113: Test get(key) with null key for inverseBididmap
      */
     @Test
     public void shouldThrowClassCastExceptionKeyNullInverse_get(){
@@ -1488,7 +1457,7 @@ public class TreeBidiMapTest {
     
 
     /*
-     * Test 2.117: Test hashCode for empty input for inverseBididmap
+     * Test 2.114: Test hashCode for empty input for inverseBididmap
      */
     @Test
     public void shouldReturnEmptyHashCodeInverse() {
@@ -1498,7 +1467,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.118: Test hashCode for single element input for inverseBididmap
+     * Test 2.115: Test hashCode for single element input for inverseBididmap
      */
     @Test
     public void shouldReturnOneElementHashCodeInverse() {
@@ -1512,7 +1481,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.119: Test hashCode for arbitrary size input for inverseBididmap
+     * Test 2.116: Test hashCode for arbitrary size input for inverseBididmap
      */
     @Test
     public void shouldReturnHashCodeInverse() {
@@ -1524,7 +1493,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.120: Test lastKey on empty input for inverseBididmap
+     * Test 2.117: Test lastKey on empty input for inverseBididmap
      */
     @Test(expected = NoSuchElementException.class)
     public void shouldFailEmptyLastKeyInverse() {
@@ -1534,7 +1503,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.121: Test lastKey on single element input for inverseBididmap
+     * Test 2.118: Test lastKey on single element input for inverseBididmap
      */
     @Test
     public void shouldReturnOneElementLastKeyInverse() {
@@ -1545,7 +1514,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.122: Test lastKey on arbitrary size input for inverseBididmap 
+     * Test 2.119: Test lastKey on arbitrary size input for inverseBididmap
      */
     @Test
     public void shouldReturnLastKeyInverse() {
@@ -1555,7 +1524,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.123: Test nextKey on empty input for inverseBididmap 
+     * Test 2.120: Test nextKey on empty input for inverseBididmap
      */
     @Test
     public void shouldReturnEmptyNextKeyInverse() {
@@ -1565,7 +1534,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.124: Test nextKey(key) on empty input with null key for inverseBididmap
+     * Test 2.121: Test nextKey(key) on empty input with null key for inverseBididmap
      */
     @Test(expected = NullPointerException.class)
     public void shouldFailReturnEmptyNextKeyInverse() {
@@ -1575,7 +1544,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.125: Test nextKey on single element input for inverseBididmap
+     * Test 2.122: Test nextKey on single element input for inverseBididmap
      */
     @Test
     public void shouldReturnOneElementNextKeyInverse() {
@@ -1586,7 +1555,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.126: Test nextKey on arbitrary size input for inverseBididmap
+     * Test 2.123: Test nextKey on arbitrary size input for inverseBididmap
      */
     @Test
     public void shouldReturnNextKeyInverse() {
@@ -1596,7 +1565,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.127: Test previousKey on empty input for inverseBididmap
+     * Test 2.124: Test previousKey on empty input for inverseBididmap
      */
     @Test
     public void shouldReturnEmptyPreviousKeyInverse() {
@@ -1607,7 +1576,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.128: Test previousKey on empty input with null key for inverseBididmap
+     * Test 2.125: Test previousKey on empty input with null key for inverseBididmap
      */
     @Test(expected = NullPointerException.class)
     public void shouldFailEmptyPreviousKeyInverse() {
@@ -1618,7 +1587,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.129: Test previousKey on single element input for inverseBididmap
+     * Test 2.126: Test previousKey on single element input for inverseBididmap
      */
     @Test
     public void shouldReturnOneElementPreviousKeyInverse() {
@@ -1629,7 +1598,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.130: Test previousKey on arbitrary size input for inverseBididmap
+     * Test 2.127: Test previousKey on arbitrary size input for inverseBididmap
      */
     @Test
     public void shouldReturnPreviousKeyInverse() {
@@ -1639,7 +1608,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.131: Test put of one element in empty TreeBidiMap for inverseBididmap
+     * Test 2.128: Test put of one element in empty TreeBidiMap for inverseBididmap
      */
     @Test
     public void shouldIncreaseSizeToOneInverse(){
@@ -1653,7 +1622,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.132: Test put of one element in nonempty TreeBidiMap for inverseBididmap
+     * Test 2.129: Test put of one element in nonempty TreeBidiMap for inverseBididmap
      */
     @Test
     public void shouldIncreaseSizeByOneInverse(){
@@ -1668,7 +1637,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.133: Test put of one element with existing key in nonempty TreeBidiMap for inverseBididmap
+     * Test 2.130: Test put of one element with existing key in nonempty TreeBidiMap for inverseBididmap
      */
     @Test
     public void shouldReplaceExistingValueInverse(){
@@ -1686,7 +1655,7 @@ public class TreeBidiMapTest {
 
 
     /*
-     * Test 2.134: Test put of one element with key of invalid type for inverseBididmap
+     * Test 2.131: Test put of one element with key of invalid type for inverseBididmap
      */
     @Test
     public void shouldFailThrowClassCastExceptionInverse_put(){
@@ -1703,7 +1672,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.135: Test put of one element with null key for inverseBididmap
+     * Test 2.132: Test put of one element with null key for inverseBididmap
      */
     @Test
     public void shouldFailThrowNullPointerExceptionInverse_put(){
@@ -1719,7 +1688,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.136: Test for toString() with map size = 0 for inverseBididmap
+     * Test 2.133: Test for toString() with map size = 0 for inverseBididmap
      */
     @Test
     public void shouldReturnEmptyBracesAsStringInverse() {
@@ -1729,7 +1698,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.137: Test for toString() with map size != 0 for inverseBididmap
+     * Test 2.134: Test for toString() with map size != 0 for inverseBididmap
      */
     @Test
     public void shouldReturnMapInBracesAsStringInverse() {
@@ -1739,7 +1708,7 @@ public class TreeBidiMapTest {
     }
     
     /*
-     * Test 2.138: Test values on empty input for inverseBididmap
+     * Test 2.135: Test values on empty input for inverseBididmap
      */
     @Test
     public void shouldReturnEmptyValuesInverse() {
@@ -1755,7 +1724,7 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.139: Test values on single element input for inverseBididmap
+     * Test 2.136: Test values on single element input for inverseBididmap
      */
     @Test
     public void shouldReturnOneElementValuesInverse() {
@@ -1770,11 +1739,4 @@ public class TreeBidiMapTest {
         }
         assertArrayEquals(expected,result);
     }
-
-  
-
-
-
-
-  
 }
