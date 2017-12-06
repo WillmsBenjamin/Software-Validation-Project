@@ -3,6 +3,7 @@ package ecse429.group10.pp3;
 import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.OrderedBidiMap;
 import org.apache.commons.collections4.OrderedMapIterator;
+import org.apache.commons.collections4.SetUtils;
 import org.apache.commons.collections4.bidimap.TreeBidiMap;
 import org.apache.commons.collections4.iterators.EmptyOrderedMapIterator;
 import org.apache.commons.collections4.map.HashedMap;
@@ -792,7 +793,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnEmptyPreviousKey() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        assertEquals(null, emptyMap.previousKey(1));
+        assertNull(emptyMap.previousKey(1));
 
     }
 
@@ -1650,5 +1651,113 @@ public class TreeBidiMapTest {
             result[index++] = (String) i;
         }
         assertArrayEquals(expected, result);
+    }
+
+    /**
+     * Test 2.140: Test the while loop specified on lines 668 to 671 of the getSmaller condition (i.e. covering the case that
+     * a right child of the tree is also our ancestor)T
+     */
+    @Test
+    public void shouldReturnElementWhoseRightChildIsAncestorOfNode(){
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        assertEquals(4, map.previousKey(5));
+    }
+
+    /**
+     * Test 2.141: Test to check that we can remove a node from a tree with only one node. The replacement for the node
+     * becomes null.
+     */
+    @Test
+    public void shouldRemoveKeyWithNullReplacement(){
+        HashedMap tempMap = new HashedMap();
+        tempMap.put(1, 1);
+        TreeBidiMap map = new TreeBidiMap(tempMap);
+
+        map.remove(1);
+        assertNull(map.get(1));
+    }
+
+    /**
+     * Test 2.142: Test to check that we can remove a node from a tree with two nodes, one of which is a parent, and the other
+     * one a child. We check that the new root becomes the child, as specified by condition on line 981
+     */
+    @Test
+    public void shouldRemoveKeyWithoutParentButWithOtherChild(){
+        HashedMap tempMap = new HashedMap();
+        tempMap.put(1, 3);
+        tempMap.put(2, 2);
+        TreeBidiMap map = new TreeBidiMap(tempMap);
+
+        map.remove(2);
+        assertNull(map.get(2));
+    }
+
+    /**
+     * Test 2.143: Test to check that we can return an empty reverse map iterator if the
+     */
+    @Test
+    public void shouldReturnEmptyInverseMapIterator(){
+        //tests this for inverse
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertFalse(inverse.mapIterator().hasNext());
+    }
+
+    /**
+     * Test 2.144: Test to check that we can return a reverse map iterator
+     */
+    @Test
+    public void shouldReturnInverseMapIterator(){
+        //tests this for inverse
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertTrue(inverse.mapIterator().hasNext());
+    }
+
+    /**
+     * Test 2.145: Test to check that we cannot call getKey() on the iterator without moving its pointer first
+     */
+    @Test(expected = IllegalStateException.class)
+    public void shouldThrowExceptionWithLastReturnGetKeyNodeInverseMapIterator(){
+        //tests this for inverse
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        inverse.mapIterator().getKey();
+    }
+
+    /**
+     * Test 2.146: Test to check that we cannot call getValue() on the iterator without moving its pointer first
+     */
+    @Test(expected = IllegalStateException.class)
+    public void shouldThrowExceptionWithLastReturnGetValueNodeInverseMapIterator(){
+        //tests this for inverse
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        inverse.mapIterator().getValue();
+    }
+
+
+    /**
+     * Test 2.147: Test to check that we can put a whole map inside of an InverseBidiMap
+     */
+    @Test
+    public void shouldPutAllInsideOfInverseTreeBidiMap(){
+        TreeBidiMap map = new TreeBidiMap(new HashMap());
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        inverse.putAll(hMap);
+
+        assertEquals(hMap.size(), inverse.size());
+    }
+
+    /**
+     * Test 2.148: Test to check that we can return an empty keyset of an InverseTreeBidiMap
+     */
+    @Test
+    public void shouldReturnValueViewKeysetInverseTreeBidiMap(){
+        TreeBidiMap map = new TreeBidiMap(new HashMap());
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        Set tempSet = inverse.keySet();
+
+        assertTrue(tempSet.isEmpty());
     }
 }
