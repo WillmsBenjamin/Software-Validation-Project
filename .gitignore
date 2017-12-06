@@ -6,6 +6,10 @@
 .project
 .settings/
 
+#Clover
+
+.clover/
+
 # Intellij
 .idea/
 *.iml
