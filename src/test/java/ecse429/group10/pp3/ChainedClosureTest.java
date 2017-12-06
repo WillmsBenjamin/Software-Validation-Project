@@ -23,12 +23,11 @@ import static org.junit.Assert.*;
 public class ChainedClosureTest {
 
 
-
     SwitchClosure switchClosure;
     ChainedClosure chainedClosure;
     Closure catchAndRethrowClosure;
     Closure[] closuresArray;
-    ArrayList<Closure<String>> closuresList  = new ArrayList<>();
+    ArrayList<Closure<String>> closuresList = new ArrayList<>();
 
     //region Rules
     @Rule
@@ -70,9 +69,9 @@ public class ChainedClosureTest {
      * predefined array
      */
     @Test
-    public void shouldReturnClosures(){
+    public void shouldReturnClosures() {
         Closure<String> testChainedClosure = ChainedClosure.chainedClosure(switchClosure, chainedClosure, catchAndRethrowClosure);
-        Closure[] actualClosures = ((ChainedClosure<String>)testChainedClosure).getClosures();
+        Closure[] actualClosures = ((ChainedClosure<String>) testChainedClosure).getClosures();
 
         assertArrayEquals(closuresArray, actualClosures);
     }
@@ -81,18 +80,18 @@ public class ChainedClosureTest {
      * Test 1.02 Test that the factory method which allows for the creation of a ChainedClosure by specifying multiple Closures works.
      */
     @Test
-    public void shouldReturnNewChainedClosureWithMultipleClosuresFactoryOverload(){
+    public void shouldReturnNewChainedClosureWithMultipleClosuresFactoryOverload() {
         Closure<String> testChainedClosure = ChainedClosure.chainedClosure(switchClosure, chainedClosure, catchAndRethrowClosure);
 
         assertNotEquals(NOPClosure.nopClosure(), testChainedClosure);
-        assertArrayEquals(closuresArray, ((ChainedClosure<String>)testChainedClosure).getClosures());
+        assertArrayEquals(closuresArray, ((ChainedClosure<String>) testChainedClosure).getClosures());
     }
 
     /**
      * Test 1.03 Test that we can create a ChainedClosure with no arguments passed to the factory method
      */
     @Test
-    public void shouldReturnEmptyClosureWithMultipleClosuresFactoryOverload(){
+    public void shouldReturnEmptyClosureWithMultipleClosuresFactoryOverload() {
         Closure<String> testChainedClosure = ChainedClosure.chainedClosure();
 
         assertEquals(NOPClosure.nopClosure(), testChainedClosure);
@@ -105,7 +104,7 @@ public class ChainedClosureTest {
     public void shouldReturnNewChainedClosureWithCollectionFactoryOverload() {
         Closure<String> testChainedClosure = ChainedClosure.chainedClosure(closuresList);
 
-        assertEquals(closuresList, Arrays.asList(((ChainedClosure<String>)testChainedClosure).getClosures()));
+        assertEquals(closuresList, Arrays.asList(((ChainedClosure<String>) testChainedClosure).getClosures()));
     }
 
     /**
@@ -121,7 +120,7 @@ public class ChainedClosureTest {
      * Test 1.06 Test that we can pass an empty collection to the factory method
      */
     @Test
-    public void shouldReturnEmptyClosureWithCollectionFactoryOverload(){
+    public void shouldReturnEmptyClosureWithCollectionFactoryOverload() {
         ArrayList nullArrayList = new ArrayList();
         Closure<String> testChainedClosure = ChainedClosure.chainedClosure(nullArrayList);
 
@@ -132,11 +131,14 @@ public class ChainedClosureTest {
      * Test 1.07 Test that the closures execute properly
      */
     @Test
-    public void shouldExecuteClosure(){
+    public void shouldExecuteClosure() {
         Closure<String> testChainedClosure = ChainedClosure.chainedClosure(closuresList);
         testChainedClosure.execute("TEST-CLOSURES");
 
-        assertEquals("TEST-CLOSURES - CLOSURE 1\r\nTEST-CLOSURES - CLOSURE 1\r\nTEST-CLOSURES - CLOSURE 2\r\n", systemOutRule.getLog());
+        // get the newline character regardless of our OS
+        String newline = System.getProperty("line.separator");
+
+        assertEquals("TEST-CLOSURES - CLOSURE 1" + newline + "TEST-CLOSURES - CLOSURE 1" + newline + "TEST-CLOSURES - CLOSURE 2" + newline, systemOutRule.getLog());
     }
 
     //endregion

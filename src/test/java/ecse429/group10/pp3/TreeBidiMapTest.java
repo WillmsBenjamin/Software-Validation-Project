@@ -1651,6 +1651,4 @@ public class TreeBidiMapTest {
         }
         assertArrayEquals(expected, result);
     }
-
-
 }
