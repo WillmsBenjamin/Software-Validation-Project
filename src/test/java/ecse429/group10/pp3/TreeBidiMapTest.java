@@ -59,32 +59,23 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.03: Test for null input on the constructor with a map as argument.
+     * Test 2.03.a: Test for null input on the constructor with a map as argument.
      */
-    @Test
-    public void shouldFailTreeBidiMapWithNullPointerException() {
-        HashedMap clone = hMap.clone();
+    @Test(expected = NullPointerException.class)
+    public void shouldFailTreeBidiMapWithNullPointerExceptionAsValue() {
         TreeBidiMap adaptedMap;
-        clone.put(8, null);
-        int i = 0;
-        try {
-            adaptedMap = new TreeBidiMap(clone);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            i++;
-        }
-        if(i == 0) {
-            fail();
-        }
-        clone = hMap.clone();
-        clone.put(null, "hhh");
-        try {
-            adaptedMap = new TreeBidiMap(clone);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        hMap.put(8, null);
+        adaptedMap = new TreeBidiMap(hMap);
+    }
+
+    /*
+     * Test 2.03.b: Test for null input on the constructor with a map as argument.
+     */
+    @Test(expected = NullPointerException.class)
+    public void shouldFailTreeBidiMapWithNullPointerExceptionAsKey() {
+        TreeBidiMap adaptedMap;
+        hMap.put(null, "hhh");
+        adaptedMap = new TreeBidiMap(hMap);
     }
 
     /*
@@ -152,33 +143,21 @@ public class TreeBidiMapTest {
      * Test 2.09: Test for containsKey(key) with null input.
      * Path through checkKey() and checkNonNullComparable() throwing NullPointerException.
      */
-    @Test
+    @Test(expected = NullPointerException.class)
     public void shouldFailContainsKeyWithNullPointerException() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        try {
-            map.containsKey(null);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        map.containsKey(null);
     }
 
     /*
      * Test 2.10: Test for containsKey(key) with non-Comparable input.
      * Path through checkKey() and checkNonNullComparable() throwing ClassCastException.
      */
-    @Test
+    @Test(expected = ClassCastException.class)
     public void shouldFailContainsKeyWithClassCastException() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int[] array = new int[5];
-        try {
-            map.containsKey(array);
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        map.containsKey(array);
     }
 
     /*
@@ -219,33 +198,21 @@ public class TreeBidiMapTest {
      * Test 2.14: Test for containsValue(value) with null input.
      * Path through checkValue() and checkNonNullComparable() throwing NullPointerException.
      */
-    @Test
+    @Test(expected = NullPointerException.class)
     public void shouldFailContainsValueWithNullPointerException() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        try {
-            map.containsValue(null);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        map.containsValue(null);
     }
 
     /*
      * Test 2.15: Test for containsValue(value) with non-Comparable input.
      * Path through checkValue() and checkNonNullComparable() throwing ClassCastException.
      */
-    @Test
+    @Test(expected = ClassCastException.class)
     public void shouldFailContainsValueWithClassCastException() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int[] array = new int[5];
-        try {
-            map.containsValue(array);
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        map.containsValue(array);
     }
 
     /*
@@ -294,7 +261,7 @@ public class TreeBidiMapTest {
      * Test 2.20: Test for new EntrySet with empty map
      */
     @Test
-    public void shouldReturnNewEntrySet(){
+    public void shouldReturnNewEntrySet() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         Set<TreeBidiMap.Entry> returnedSet = emptyMap.entrySet();
         assertNotNull(returnedSet);
@@ -306,18 +273,18 @@ public class TreeBidiMapTest {
      * Test 2.21: Test for retrieval ofEntrySet with nonempty map
      */
     @Test
-    public void shouldReturnEntryView(){
+    public void shouldReturnEntryView() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         Set<TreeBidiMap.Entry> returnedSet = map.entrySet();
         assertNotNull(returnedSet);
-        assertEquals( 7, returnedSet.size());
+        assertEquals(7, returnedSet.size());
     }
 
     /*
      * Test 2.22: Test get(key) with empty map
      */
     @Test
-    public void shouldReturnNullKeyNotPresentTreeEmpty(){
+    public void shouldReturnNullKeyNotPresentTreeEmpty() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         assertNull(emptyMap.get(1));
     }
@@ -326,7 +293,7 @@ public class TreeBidiMapTest {
      * Test 2.23: Test get(key) with value present in nonempty map
      */
     @Test
-    public void shouldReturnValueFromKey(){
+    public void shouldReturnValueFromKey() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         assertEquals("aaa", map.get(1));
     }
@@ -335,7 +302,7 @@ public class TreeBidiMapTest {
      * Test 2.24: Test get(key) with value not present in nonempty map
      */
     @Test
-    public void shouldReturnNullKeyNotPresent(){
+    public void shouldReturnNullKeyNotPresent() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         assertNull(map.get(23));
     }
@@ -343,39 +310,27 @@ public class TreeBidiMapTest {
     /*
      * Test 2.25: Test get(key) with non comparable key
      */
-    @Test
-    public void shouldThrowClassCastExceptionKeyWrongType_get(){
+    @Test(expected = ClassCastException.class)
+    public void shouldThrowClassCastExceptionKeyWrongType_get() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int[] array = new int[5];
-        try {
-            map.get(array);
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        map.get(array);
     }
 
     /*
      * Test 2.26: Test get(key) with null key
      */
-    @Test
-    public void shouldThrowClassCastExceptionKeyNull_get(){
+    @Test(expected = NullPointerException.class)
+    public void shouldThrowClassCastExceptionKeyNull_get() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        try {
-            map.get(null);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        map.get(null);
     }
 
     /*
      * Test 2.27: Test getKey(value) with empty map
      */
     @Test
-    public void shouldReturnNullValueNotPresentTreeEmpty(){
+    public void shouldReturnNullValueNotPresentTreeEmpty() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         assertNull(emptyMap.getKey("value"));
     }
@@ -384,7 +339,7 @@ public class TreeBidiMapTest {
      * Test 2.28: Test getKey(value) with value present in nonempty map
      */
     @Test
-    public void shouldReturnKeyFromValue(){
+    public void shouldReturnKeyFromValue() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         assertEquals(1, map.getKey("aaa"));
     }
@@ -393,7 +348,7 @@ public class TreeBidiMapTest {
      * Test 2.29: Test getKey(value) with value not present in nonempty map
      */
     @Test
-    public void shouldReturnNullValueNotPresent(){
+    public void shouldReturnNullValueNotPresent() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         assertNull(map.getKey("wrong"));
     }
@@ -401,73 +356,61 @@ public class TreeBidiMapTest {
     /*
      * Test 2.30: Test get(key) with non comparable key
      */
-    @Test
-    public void shouldThrowClassCastExceptionValueWrongType_getKey(){
+    @Test(expected = ClassCastException.class)
+    public void shouldThrowClassCastExceptionValueWrongType_getKey() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int[] array = new int[5];
-        try {
-            map.getKey(array);
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        map.getKey(array);
     }
 
     /*
      * Test 2.31: Test get(key) with null key
      */
-    @Test
-    public void shouldThrowClassCastExceptionValueNull_getKey(){
+    @Test(expected = NullPointerException.class)
+    public void shouldThrowClassCastExceptionValueNull_getKey() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        try {
-            map.getKey(null);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        map.getKey(null);
     }
 
     /*
      * Test 2.32: Test put of one element in empty TreeBidiMap
      */
     @Test
-    public void shouldIncreaseSizeToOne(){
+    public void shouldIncreaseSizeToOne() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         emptyMap.put(1, "new");
         assertFalse(emptyMap.isEmpty());
         assertTrue(emptyMap.containsKey(1));
         assertTrue(emptyMap.containsValue("new"));
-        assertEquals( 1, emptyMap.size());
+        assertEquals(1, emptyMap.size());
     }
 
     /*
      * Test 2.33: Test put of one element in nonempty TreeBidiMap
      */
     @Test
-    public void shouldIncreaseSizeByOne(){
+    public void shouldIncreaseSizeByOne() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
         map.put(9, "new");
         assertFalse(map.isEmpty());
         assertTrue(map.containsKey(9));
         assertTrue(map.containsValue("new"));
-        assertEquals( prev_size+1 , map.size());
+        assertEquals(prev_size + 1, map.size());
     }
 
     /*
      * Test 2.34: Test put of one element with existing key in nonempty TreeBidiMap
      */
     @Test
-    public void shouldReplaceExistingValue(){
+    public void shouldReplaceExistingValue() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
         map.put(1, "new");
         assertFalse(map.isEmpty());
         assertTrue(map.containsKey(1));
         assertTrue(map.containsValue("new"));
-        assertEquals( prev_size , map.size());
+        assertEquals(prev_size, map.size());
         assertEquals("new", map.get(1));
         assertEquals(1, map.getKey("new"));
     }
@@ -476,7 +419,7 @@ public class TreeBidiMapTest {
      * Test 2.35: Test put of one element with existing value in nonempty TreeBidiMap
      */
     @Test
-    public void shouldReplaceRemoveExistingKey(){
+    public void shouldReplaceRemoveExistingKey() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
         map.put(9, "aaa");
@@ -484,7 +427,7 @@ public class TreeBidiMapTest {
         assertTrue(map.containsKey(9));
         assertTrue(map.containsValue("aaa"));
         assertFalse(map.containsKey(1));
-        assertEquals( prev_size , map.size());
+        assertEquals(prev_size, map.size());
         assertEquals("aaa", map.get(9));
         assertEquals(9, map.getKey("aaa"));
     }
@@ -492,40 +435,28 @@ public class TreeBidiMapTest {
     /*
      * Test 2.36: Test put of one element with key of invalid type
      */
-    @Test
-    public void shouldFailThrowClassCastException_put(){
+    @Test(expected = ClassCastException.class)
+    public void shouldFailThrowClassCastException_put() {
         TreeBidiMap map = new TreeBidiMap();
         int[] array = new int[5];
-        try {
-            map.put(array, "new");
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        map.put(array, "new");
     }
+
 
     /*
      * Test 2.37: Test put of one element with null key
      */
-    @Test
-    public void shouldFailThrowNullPointerException_put(){
+    @Test(expected = NullPointerException.class)
+    public void shouldFailThrowNullPointerException_put() {
         TreeBidiMap map = new TreeBidiMap();
-
-        try {
-            map.put(null, "new");
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        map.put(null, "new");
     }
 
     /*
      * Test 2.38 Test remove of one element with empty map
      */
     @Test
-    public void shouldReturnNullNoMappingToRemove(){
+    public void shouldReturnNullNoMappingToRemove() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         assertNull(emptyMap.remove(1));
     }
@@ -534,7 +465,7 @@ public class TreeBidiMapTest {
     * Test 2.39 Test remove of one element present in nonempty map
     */
     @Test
-    public void shouldReturnValueOfMappingRemoved(){
+    public void shouldReturnValueOfMappingRemoved() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
         assertEquals("aaa", map.remove(1));
@@ -545,50 +476,37 @@ public class TreeBidiMapTest {
     * Test 2.40 Test remove of one element not present in nonempty map
     */
     @Test
-    public void shouldReturnNullValueToRemoveNotMapped(){
+    public void shouldReturnNullValueToRemoveNotMapped() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
-        assertNull( map.remove(34));
+        assertNull(map.remove(34));
         assertEquals(prev_size, map.size());
     }
 
     /*
      * Test 2.41: Test remove of one element with key of invalid type
      */
-    @Test
-    public void shouldFailThrowClassCastException_remove(){
+    @Test(expected = ClassCastException.class)
+    public void shouldFailThrowClassCastException_remove() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int[] array = new int[5];
-        try {
-            map.remove(array);
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        map.remove(array);
     }
 
     /*
      * Test 2.42: Test remove of one element with null key
      */
-    @Test
-    public void shouldFailThrowNullPointerException_remove(){
+    @Test(expected = NullPointerException.class)
+    public void shouldFailThrowNullPointerException_remove() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-
-        try {
-            map.remove(null);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        map.remove(null);
     }
 
     /*
      * Test 2.43: Test putAll of empty map into empty map
      */
     @Test
-    public void shouldNotAlterNewMap(){
+    public void shouldNotAlterNewMap() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         TreeBidiMap map = new TreeBidiMap();
         assertTrue(emptyMap.isEmpty());
@@ -600,7 +518,7 @@ public class TreeBidiMapTest {
      * Test 2.44: Test putAll of nonempty map into empty map
      */
     @Test
-    public void shouldChangeMapSizeToOtherMapSize(){
+    public void shouldChangeMapSizeToOtherMapSize() {
         TreeBidiMap otherMap = new TreeBidiMap(hMap);
         TreeBidiMap map = new TreeBidiMap();
         int size = otherMap.size();
@@ -614,7 +532,7 @@ public class TreeBidiMapTest {
      * Test 2.45: Test putAll of empty map into nonempty map
      */
     @Test
-    public void shouldNotAlterNewNonEmptyMap(){
+    public void shouldNotAlterNewNonEmptyMap() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         TreeBidiMap map = new TreeBidiMap(hMap);
         int size = map.size();
@@ -629,7 +547,7 @@ public class TreeBidiMapTest {
      * Test 2.46: Test putAll of nonempty map into nonempty map with different pairing
      */
     @Test
-    public void shouldChangeSizeToSumOfMaps(){
+    public void shouldChangeSizeToSumOfMaps() {
         HashedMap hMap2;
         hMap2 = new HashedMap(3);
         hMap2.put(8, "zzz");
@@ -648,7 +566,7 @@ public class TreeBidiMapTest {
         assertFalse(map.isEmpty());
         map.putAll(otherMap);
         assertFalse(map.isEmpty());
-        assertEquals(size+othersize, map.size());
+        assertEquals(size + othersize, map.size());
 
     }
 
@@ -656,7 +574,7 @@ public class TreeBidiMapTest {
      * Test 2.47: Test putAll of nonempty map into nonempty map with matching key
      */
     @Test
-    public void shouldResultInValueMappingChange(){
+    public void shouldResultInValueMappingChange() {
         TreeBidiMap otherMap = new TreeBidiMap(hMap);
         TreeBidiMap map = new TreeBidiMap(hMap);
 
@@ -682,7 +600,7 @@ public class TreeBidiMapTest {
      * Test 2.48: Test putAll of nonempty map into nonempty map with matching value
      */
     @Test
-    public void shouldResultInKeyMappingChange(){
+    public void shouldResultInKeyMappingChange() {
         TreeBidiMap otherMap = new TreeBidiMap(hMap);
         TreeBidiMap map = new TreeBidiMap(hMap);
 
@@ -710,7 +628,7 @@ public class TreeBidiMapTest {
      * Test 2.49: Test putAll of nonempty map into nonempty map with exact same entries
      */
     @Test
-    public void shouldNotAlterMap_putAll(){
+    public void shouldNotAlterMap_putAll() {
         TreeBidiMap otherMap = new TreeBidiMap(hMap);
         TreeBidiMap map = new TreeBidiMap(hMap);
 
@@ -729,7 +647,7 @@ public class TreeBidiMapTest {
      * Test 2.50 Test remove of one element with empty map
      */
     @Test
-    public void shouldReturnNullNoValueMappingToRemove(){
+    public void shouldReturnNullNoValueMappingToRemove() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         assertNull(emptyMap.removeValue("aaa"));
     }
@@ -738,7 +656,7 @@ public class TreeBidiMapTest {
      * Test 2.51 Test remove of one element present in nonempty map
      */
     @Test
-    public void shouldReturnKeyOfMappingRemoved(){
+    public void shouldReturnKeyOfMappingRemoved() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
         assertEquals(1, map.removeValue("aaa"));
@@ -749,43 +667,30 @@ public class TreeBidiMapTest {
      * Test 2.52 Test remove of one element not present in nonempty map
      */
     @Test
-    public void shouldReturnNullKeyToRemoveNotMapped(){
+    public void shouldReturnNullKeyToRemoveNotMapped() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
-        assertNull( map.removeValue("wrong"));
+        assertNull(map.removeValue("wrong"));
         assertEquals(prev_size, map.size());
     }
 
     /*
      * Test 2.53: Test remove of one element with key of invalid type
      */
-    @Test
-    public void shouldFailThrowClassCastException_removeValue(){
+    @Test(expected = ClassCastException.class)
+    public void shouldFailThrowClassCastException_removeValue() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int[] array = new int[5];
-        try {
-            map.removeValue(array);
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        map.removeValue(array);
     }
 
     /*
      * Test 2.54: Test remove of one element with null key
      */
-    @Test
-    public void shouldFailThrowNullPointerException_removeValue(){
+    @Test(expected = NullPointerException.class)
+    public void shouldFailThrowNullPointerException_removeValue() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-
-        try {
-            map.removeValue(null);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        map.removeValue(null);
     }
 
     /*
@@ -803,8 +708,8 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementFirstKey() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1,"aaa");
-        assertEquals(1 , map.firstKey());
+        map.put(1, "aaa");
+        assertEquals(1, map.firstKey());
     }
 
     /*
@@ -813,7 +718,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnFirstKey() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        assertEquals(1 , map.firstKey());
+        assertEquals(1, map.firstKey());
     }
 
     /*
@@ -831,8 +736,8 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementLastKey() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1,"aaa");
-        assertEquals(1 , map.lastKey());
+        map.put(1, "aaa");
+        assertEquals(1, map.lastKey());
     }
 
     /*
@@ -841,7 +746,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnLastKey() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        assertEquals(7 , map.lastKey());
+        assertEquals(7, map.lastKey());
     }
 
     /*
@@ -850,7 +755,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnEmptyNextKey() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        assertEquals(null , emptyMap.nextKey(1));
+        assertEquals(null, emptyMap.nextKey(1));
     }
 
     /*
@@ -868,8 +773,8 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementNextKey() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1,"aaa");
-        assertEquals(null,map.nextKey(1));
+        map.put(1, "aaa");
+        assertEquals(null, map.nextKey(1));
     }
 
     /*
@@ -878,7 +783,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnNextKey() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        assertEquals(2 , map.nextKey(1));
+        assertEquals(2, map.nextKey(1));
     }
 
     /*
@@ -887,7 +792,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnEmptyPreviousKey() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        assertEquals(null , emptyMap.previousKey(1));
+        assertEquals(null, emptyMap.previousKey(1));
 
     }
 
@@ -907,8 +812,8 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementPreviousKey() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1,"aaa");
-        assertEquals(null,map.previousKey(1));
+        map.put(1, "aaa");
+        assertEquals(null, map.previousKey(1));
     }
 
     /*
@@ -917,7 +822,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnPreviousKey() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        assertEquals(1 , map.previousKey(2));
+        assertEquals(1, map.previousKey(2));
     }
 
     /*
@@ -929,10 +834,10 @@ public class TreeBidiMapTest {
         int[] expected = {};
         int[] result = new int[emptyMap.keySet().size()];
         int index = 0;
-        for(Object i : emptyMap.keySet()) {
+        for (Object i : emptyMap.keySet()) {
             result[index++] = (Integer) i;
         }
-        assertArrayEquals(expected,result);
+        assertArrayEquals(expected, result);
     }
 
     /*
@@ -941,14 +846,14 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementKeySet() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "aaa");
+        map.put(1, "aaa");
         int[] expected = {1};
         int[] result = new int[map.keySet().size()];
         int index = 0;
-        for(Object i : map.keySet()) {
+        for (Object i : map.keySet()) {
             result[index++] = (Integer) i;
         }
-        assertArrayEquals(expected,result);
+        assertArrayEquals(expected, result);
     }
 
     /*
@@ -957,13 +862,13 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnKeySet() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        int[] expected = {1,2,3,4,5,6,7};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7};
         int[] result = new int[map.keySet().size()];
         int index = 0;
-        for(Object i : map.keySet()) {
+        for (Object i : map.keySet()) {
             result[index++] = (Integer) i;
         }
-        assertArrayEquals(expected,result);
+        assertArrayEquals(expected, result);
     }
 
     /*
@@ -975,10 +880,10 @@ public class TreeBidiMapTest {
         String[] expected = {};
         String[] result = new String[emptyMap.values().size()];
         int index = 0;
-        for(Object i : emptyMap.values()) {
+        for (Object i : emptyMap.values()) {
             result[index++] = (String) i;
         }
-        assertArrayEquals(expected,result);
+        assertArrayEquals(expected, result);
     }
 
     /*
@@ -987,14 +892,14 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementValues() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "aaa");
+        map.put(1, "aaa");
         String[] expected = {"aaa"};
         String[] result = new String[map.values().size()];
         int index = 0;
-        for(Object i : map.values()) {
+        for (Object i : map.values()) {
             result[index++] = (String) i;
         }
-        assertArrayEquals(expected,result);
+        assertArrayEquals(expected, result);
     }
 
     /*
@@ -1003,13 +908,13 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnValues() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        String[] expected = {"aaa" , "bbb" , "ccc" , "ddd" , "eee" , "fff" , "ggg"};
+        String[] expected = {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg"};
         String[] result = new String[map.values().size()];
         int index = 0;
-        for(Object i : map.values()) {
+        for (Object i : map.values()) {
             result[index++] = (String) i;
         }
-        assertArrayEquals(expected,result);
+        assertArrayEquals(expected, result);
     }
 
 
@@ -1020,7 +925,7 @@ public class TreeBidiMapTest {
     public void shouldReturnEmptyInverseBidiMap() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        assertEquals(expected , emptyMap.inverseBidiMap());
+        assertEquals(expected, emptyMap.inverseBidiMap());
     }
 
     /*
@@ -1029,11 +934,11 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementInverseBidiMap() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "aaa");
+        map.put(1, "aaa");
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        expected.put("aaa" , 1);
+        expected.put("aaa", 1);
 
-        assertEquals(expected,map.inverseBidiMap());
+        assertEquals(expected, map.inverseBidiMap());
     }
 
     /*
@@ -1043,14 +948,14 @@ public class TreeBidiMapTest {
     public void shouldReturnInverseBidiMap() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        expected.put("aaa" , 1);
-        expected.put("bbb" , 2);
-        expected.put("ccc" , 3);
-        expected.put("ddd" , 4);
-        expected.put("eee" , 5);
-        expected.put("fff" , 6);
-        expected.put("ggg" , 7);
-        assertEquals(expected,map.inverseBidiMap());
+        expected.put("aaa", 1);
+        expected.put("bbb", 2);
+        expected.put("ccc", 3);
+        expected.put("ddd", 4);
+        expected.put("eee", 5);
+        expected.put("fff", 6);
+        expected.put("ggg", 7);
+        assertEquals(expected, map.inverseBidiMap());
     }
 
     /*
@@ -1060,7 +965,7 @@ public class TreeBidiMapTest {
     public void shouldReturnEmptyEquals() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        assertEquals(true , emptyMap.equals(expected));
+        assertEquals(true, emptyMap.equals(expected));
     }
 
     /*
@@ -1069,10 +974,10 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementEquals() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "aaa");
+        map.put(1, "aaa");
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        expected.put(1 , "aaa");
-        assertEquals(true , map.equals(expected));
+        expected.put(1, "aaa");
+        assertEquals(true, map.equals(expected));
     }
 
     /*
@@ -1082,7 +987,7 @@ public class TreeBidiMapTest {
     public void shouldReturnEquals() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         TreeBidiMap expected = new TreeBidiMap(hMap);
-        assertEquals(true , map.equals(expected));
+        assertEquals(true, map.equals(expected));
     }
 
     /*
@@ -1091,7 +996,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnEmptyHashCode() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        assertEquals(0 , emptyMap.hashCode());
+        assertEquals(0, emptyMap.hashCode());
     }
 
     /*
@@ -1100,9 +1005,9 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementHashCode() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "aaa");
+        map.put(1, "aaa");
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        expected.put(1 , "aaa");
+        expected.put(1, "aaa");
         assertEquals(expected.hashCode(), map.hashCode());
     }
 
@@ -1117,13 +1022,44 @@ public class TreeBidiMapTest {
     }
 
     /*
-     * Test 2.84: Test entrySet for empty input
+     * Test 2.84: Test toString for empty input
+     */
+    @Test
+    public void shouldReturnEmptyToString() {
+        TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
+        String expected = "{}";
+        assertEquals(expected, emptyMap.toString());
+    }
+
+    /*
+     * Test 2.85: Test toString for single element input
+     */
+    @Test
+    public void shouldReturnOneElementToString() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1, "aaa");
+        String expected = "{1=aaa}";
+        assertEquals(expected, map.toString());
+    }
+
+    /*
+     * Test 2.86: Test toString for arbitrary size input
+     */
+    @Test
+    public void shouldReturnToString() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        String expected = "{1=aaa, 2=bbb, 3=ccc, 4=ddd, 5=eee, 6=fff, 7=ggg}";
+        assertEquals(expected, map.toString());
+    }
+
+    /*
+     * Test 2.87: Test entrySet for empty input
      */
     @Test
     public void shouldReturnEmptyEntrySet() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        assertEquals(expected.entrySet() , emptyMap.entrySet());
+        assertEquals(expected.entrySet(), emptyMap.entrySet());
     }
 
     /*
@@ -1132,10 +1068,10 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementEntrySet() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "aaa");
+        map.put(1, "aaa");
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        expected.put(1 , "aaa");
-        assertEquals(expected.entrySet() , map.entrySet());
+        expected.put(1, "aaa");
+        assertEquals(expected.entrySet(), map.entrySet());
     }
 
     /*
@@ -1145,130 +1081,130 @@ public class TreeBidiMapTest {
     public void shouldReturnEntrySet() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         TreeBidiMap expected = new TreeBidiMap(hMap);
-        assertEquals(expected.entrySet() , map.entrySet());
+        assertEquals(expected.entrySet(), map.entrySet());
     }
-    
+
     /*
      * Test 2.90: MapIterator test on empty set
      */
     @Test
-    public void shouldReturnFalseOnEmptySet(){
-    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
-    	MapIterator it = map.mapIterator();
+    public void shouldReturnFalseOnEmptySet() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        MapIterator it = map.mapIterator();
         assertFalse(it.hasNext());
-    	
+
     }
-    
+
     /*
      * Test 2.91: MapIterator test on single element
      */
     @Test
-    public void shouldReturnTrueOneElementInSet(){
-    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "test");
+    public void shouldReturnTrueOneElementInSet() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put(1, "test");
         MapIterator it = map.mapIterator();
         assertTrue(it.hasNext());
-    	
+
     }
-    
+
     /*
      * Test 2.92:  MapIterator test data return type with populated set 
      */
     @Test
-    public void shouldReturnTrueOnIteratorTypeFullSet(){
-    	TreeBidiMap map = new TreeBidiMap(hMap);
-    	MapIterator it = map.mapIterator();
-    	assertTrue(it instanceof OrderedMapIterator);
+    public void shouldReturnTrueOnIteratorTypeFullSet() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        MapIterator it = map.mapIterator();
+        assertTrue(it instanceof OrderedMapIterator);
     }
-    
+
     /*
      * Test 2.93:  MapIterator test data return type with empty set 
      */
     @Test
-    public void shouldReturnTrueOnIteratorTypeEmptySet(){
-    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
-    	MapIterator it = map.mapIterator();
-    	assertTrue(it instanceof EmptyOrderedMapIterator);
+    public void shouldReturnTrueOnIteratorTypeEmptySet() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        MapIterator it = map.mapIterator();
+        assertTrue(it instanceof EmptyOrderedMapIterator);
     }
-    
+
     /*
      * Test 2.94:  InverseBidiMap size test
      */
     @Test
-    public void shouldReturnProperInverseSize(){
-    	TreeBidiMap map = new TreeBidiMap(hMap);
-    	OrderedBidiMap inverse =  map.inverseBidiMap();
-    	assertEquals(7, inverse.size());
-    	
+    public void shouldReturnProperInverseSize() {
+        TreeBidiMap map = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals(7, inverse.size());
+
     }
-    
+
     /*
      * Test 2.95: InverseBidiMap element order check 
      */
     @Test
-    public void shouldReturnProperInverseElementOrder(){
-    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put("A" , "B");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-    	assertEquals("A" , inverse.get("B"));
-    	
+    public void shouldReturnProperInverseElementOrder() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put("A", "B");
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals("A", inverse.get("B"));
+
     }
-    
+
     /*
      * Test 2.96: InverseBidiMap with empty set 
      */
     @Test
-    public void shouldReturnProperInverseEmptySize(){
-    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
-    	OrderedBidiMap inverse =  map.inverseBidiMap();
-    	assertEquals(0, inverse.size());
-    	
+    public void shouldReturnProperInverseEmptySize() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals(0, inverse.size());
+
     }
-    
+
     /*
      * Test 2.97: InverseBidiMap with one element 
      */
     @Test
-    public void shouldReturnProperInverseOneElementSize(){
-    	TreeBidiMap map = new TreeBidiMap(new HashedMap());
-    	map.put("A" , "B");
-    	OrderedBidiMap inverse =  map.inverseBidiMap();
-    	assertEquals(1, inverse.size());
-    	
+    public void shouldReturnProperInverseOneElementSize() {
+        TreeBidiMap map = new TreeBidiMap(new HashedMap());
+        map.put("A", "B");
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals(1, inverse.size());
+
     }
-    
+
     /*
      * Test 2.98: InverseBidi Map with clear 
      */
     @Test
-    public void shouldClearInverseBidiMap(){
-    TreeBidiMap clearableMap = new TreeBidiMap(hMap);
-    OrderedBidiMap inverse =  clearableMap.inverseBidiMap();
-    assertEquals(7, inverse.size());
-    inverse.clear();
-    assertEquals(0, inverse.size());
+    public void shouldClearInverseBidiMap() {
+        TreeBidiMap clearableMap = new TreeBidiMap(hMap);
+        OrderedBidiMap inverse = clearableMap.inverseBidiMap();
+        assertEquals(7, inverse.size());
+        inverse.clear();
+        assertEquals(0, inverse.size());
     }
-    
+
     /*
      * Test 2.99: Test for containsKey(key) in inverse BidiMap.
       */
     @Test
     public void shouldReturnKeyIsContainedFirstInverse() {
         TreeBidiMap clearableMap = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  clearableMap.inverseBidiMap();
+        OrderedBidiMap inverse = clearableMap.inverseBidiMap();
         assertTrue(inverse.containsKey("aaa"));
     }
-    
+
     /*
      * Test 2.100: Test for containsKey(key) in inverse BidiMap.
       */
     @Test
     public void shouldReturnKeyIsNotContainedInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertFalse(inverse.containsKey("zzz"));
     }
-    
+
     /*
      * Test 2.101: Test for containsValue(value) showing the value is contained in inverse bidimap.
      
@@ -1276,7 +1212,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnValueIsContainedFirstInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertTrue(inverse.containsValue(1));
     }
 
@@ -1286,7 +1222,7 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnValueIsContainedLastInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertTrue(inverse.containsValue(7));
     }
 
@@ -1296,33 +1232,27 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnValueIsNotContainedInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertFalse(inverse.containsValue(60));
     }
 
     /*
      * Test 2.104: Test for containsValue(value) with null input in inverse bidimap.
      */
-    @Test
+    @Test(expected = NullPointerException.class)
     public void shouldFailContainsValueWithNullPointerExceptionInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        try {
-            inverse.containsValue(null);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        inverse.containsValue(null);
     }
-    
+
     /*
      * Test 2.105: Test for isEmpty() with map size = 0 for inverseBidimap.
      */
     @Test
     public void shouldReturnMapIsEmptyInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap();
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         assertTrue(inverse.isEmpty());
     }
 
@@ -1332,17 +1262,17 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnMapIsNotEmptyInverse() {
         TreeBidiMap nonEmptyMap = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  nonEmptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = nonEmptyMap.inverseBidiMap();
         assertFalse(inverse.isEmpty());
     }
-    
+
     /*
      * Test 2.107: Test for new EntrySet with empty map for inverseBidimap
      */
     @Test
-    public void shouldReturnNewEntrySetInverse(){
+    public void shouldReturnNewEntrySetInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap();
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         Set<TreeBidiMap.Entry> returnedSet = inverse.entrySet();
         assertNotNull(returnedSet);
         assertEquals(0, returnedSet.size());
@@ -1353,21 +1283,21 @@ public class TreeBidiMapTest {
      * Test 2.108: Test for retrieval of EntrySet with nonempty map for inverseBididmap
      */
     @Test
-    public void shouldReturnEntryViewInverse(){
+    public void shouldReturnEntryViewInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         Set<TreeBidiMap.Entry> returnedSet = inverse.entrySet();
         assertNotNull(returnedSet);
-        assertEquals( 7, returnedSet.size());
+        assertEquals(7, returnedSet.size());
     }
-    
+
     /*
      * Test 2.109: Test firstKey on empty input for inverseBididmap
      */
     @Test(expected = NoSuchElementException.class)
     public void shouldFailEmptyFirstKeyInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         inverse.firstKey();
     }
 
@@ -1377,8 +1307,8 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementFirstKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1,"aaa");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        map.put(1, "aaa");
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertEquals("aaa", inverse.firstKey());
     }
 
@@ -1388,17 +1318,17 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnFirstKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        assertEquals("aaa" , inverse.firstKey());
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals("aaa", inverse.firstKey());
     }
-    
+
     /*
      * Test 2.112: Test get(key) with empty map for inverseBididmap
      */
     @Test
-    public void shouldReturnNullKeyNotPresentTreeEmptyInverse(){
+    public void shouldReturnNullKeyNotPresentTreeEmptyInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap();
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         assertNull(inverse.get(1));
     }
 
@@ -1406,9 +1336,9 @@ public class TreeBidiMapTest {
      * Test 2.113: Test get(key) with value present in nonempty map for inverseBididmap
      */
     @Test
-    public void shouldReturnValueFromKeyInverse(){
+    public void shouldReturnValueFromKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertEquals(1, inverse.get("aaa"));
     }
 
@@ -1416,45 +1346,33 @@ public class TreeBidiMapTest {
      * Test 2.114: Test get(key) with value not present in nonempty map for inverseBididmap
      */
     @Test
-    public void shouldReturnNullKeyNotPresentInverse(){
+    public void shouldReturnNullKeyNotPresentInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertNull(inverse.get("xxx"));
     }
 
     /*
      * Test 2.115: Test get(key) with non comparable key for inverseBididmap
      */
-    @Test
-    public void shouldThrowClassCastExceptionKeyWrongTypeInverse_get(){
+    @Test(expected = ClassCastException.class)
+    public void shouldThrowClassCastExceptionKeyWrongTypeInverse_get() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         int[] array = new int[5];
-        try {
-            inverse.get(array);
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        inverse.get(array);
     }
 
     /*
      * Test 2.116: Test get(key) with null key for inverseBididmap
      */
-    @Test
-    public void shouldThrowClassCastExceptionKeyNullInverse_get(){
+    @Test(expected = NullPointerException.class)
+    public void shouldThrowClassCastExceptionKeyNullInverse_get() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        try {
-        	inverse.get(null);
-        } catch(Exception e) {
-            assertTrue(e instanceof NullPointerException);
-            return;
-        }
-        fail();
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        inverse.get(null);
     }
-    
+
 
     /*
      * Test 2.117: Test hashCode for empty input for inverseBididmap
@@ -1462,8 +1380,8 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnEmptyHashCodeInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
-        assertEquals(0 , inverse.hashCode());
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
+        assertEquals(0, inverse.hashCode());
     }
 
     /*
@@ -1472,11 +1390,11 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementHashCodeInverse() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1 , "aaa");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        map.put(1, "aaa");
+        OrderedBidiMap inverse = map.inverseBidiMap();
         TreeBidiMap expected = new TreeBidiMap(new HashedMap());
-        expected.put(1 , "aaa");
-        OrderedBidiMap inverseExpected =  expected.inverseBidiMap();
+        expected.put(1, "aaa");
+        OrderedBidiMap inverseExpected = expected.inverseBidiMap();
         assertEquals(inverseExpected.hashCode(), inverse.hashCode());
     }
 
@@ -1487,18 +1405,18 @@ public class TreeBidiMapTest {
     public void shouldReturnHashCodeInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         TreeBidiMap expected = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        OrderedBidiMap inverseExpected =  expected.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        OrderedBidiMap inverseExpected = expected.inverseBidiMap();
         assertEquals(inverseExpected.hashCode(), inverse.hashCode());
     }
-    
+
     /*
      * Test 2.120: Test lastKey on empty input for inverseBididmap
      */
     @Test(expected = NoSuchElementException.class)
     public void shouldFailEmptyLastKeyInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         inverse.lastKey();
     }
 
@@ -1508,9 +1426,9 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementLastKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1,"aaa");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        assertEquals("aaa" , inverse.lastKey());
+        map.put(1, "aaa");
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals("aaa", inverse.lastKey());
     }
 
     /*
@@ -1519,18 +1437,18 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnLastKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        assertEquals("ggg" , inverse.lastKey());
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals("ggg", inverse.lastKey());
     }
-    
+
     /*
      * Test 2.123: Test nextKey on empty input for inverseBididmap 
      */
     @Test
     public void shouldReturnEmptyNextKeyInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
-        assertEquals(null , inverse.nextKey(1));
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
+        assertEquals(null, inverse.nextKey(1));
     }
 
     /*
@@ -1539,7 +1457,7 @@ public class TreeBidiMapTest {
     @Test(expected = NullPointerException.class)
     public void shouldFailReturnEmptyNextKeyInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         emptyMap.nextKey(null);
     }
 
@@ -1549,9 +1467,9 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementNextKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1,"aaa");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        assertEquals(null,inverse.nextKey("aaa"));
+        map.put(1, "aaa");
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals(null, inverse.nextKey("aaa"));
     }
 
     /*
@@ -1560,18 +1478,18 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnNextKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        assertEquals("bbb" , inverse.nextKey("aaa"));
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals("bbb", inverse.nextKey("aaa"));
     }
-    
+
     /*
      * Test 2.127: Test previousKey on empty input for inverseBididmap
      */
     @Test
     public void shouldReturnEmptyPreviousKeyInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
-        assertEquals(null , inverse.previousKey("aaa"));
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
+        assertEquals(null, inverse.previousKey("aaa"));
 
     }
 
@@ -1581,7 +1499,7 @@ public class TreeBidiMapTest {
     @Test(expected = NullPointerException.class)
     public void shouldFailEmptyPreviousKeyInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         inverse.previousKey(null);
 
     }
@@ -1592,9 +1510,9 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementPreviousKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put(1,"aaa");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        assertEquals(null,inverse.previousKey("aaa"));
+        map.put(1, "aaa");
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals(null, inverse.previousKey("aaa"));
     }
 
     /*
@@ -1603,52 +1521,52 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnPreviousKeyInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  map.inverseBidiMap();
-        assertEquals("aaa" , inverse.previousKey("bbb"));
+        OrderedBidiMap inverse = map.inverseBidiMap();
+        assertEquals("aaa", inverse.previousKey("bbb"));
     }
-    
+
     /*
      * Test 2.131: Test put of one element in empty TreeBidiMap for inverseBididmap
      */
     @Test
-    public void shouldIncreaseSizeToOneInverse(){
+    public void shouldIncreaseSizeToOneInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap();
         emptyMap.put(1, "new");
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         assertFalse(inverse.isEmpty());
         assertTrue(inverse.containsKey("new"));
         assertTrue(inverse.containsValue(1));
-        assertEquals( 1, inverse.size());
+        assertEquals(1, inverse.size());
     }
 
     /*
      * Test 2.132: Test put of one element in nonempty TreeBidiMap for inverseBididmap
      */
     @Test
-    public void shouldIncreaseSizeByOneInverse(){
+    public void shouldIncreaseSizeByOneInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
         map.put(9, "new");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertFalse(inverse.isEmpty());
         assertTrue(inverse.containsKey("new"));
         assertTrue(inverse.containsValue(9));
-        assertEquals( prev_size+1 , inverse.size());
+        assertEquals(prev_size + 1, inverse.size());
     }
 
     /*
      * Test 2.133: Test put of one element with existing key in nonempty TreeBidiMap for inverseBididmap
      */
     @Test
-    public void shouldReplaceExistingValueInverse(){
+    public void shouldReplaceExistingValueInverse() {
         TreeBidiMap map = new TreeBidiMap(hMap);
         int prev_size = map.size();
         map.put(1, "new");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         assertFalse(inverse.isEmpty());
         assertTrue(inverse.containsKey("new"));
         assertTrue(inverse.containsValue(1));
-        assertEquals( prev_size , inverse.size());
+        assertEquals(prev_size, inverse.size());
         assertEquals(1, inverse.get("new"));
         assertEquals("new", inverse.getKey(1));
     }
@@ -1657,43 +1575,37 @@ public class TreeBidiMapTest {
     /*
      * Test 2.134: Test put of one element with key of invalid type for inverseBididmap
      */
-    @Test
-    public void shouldFailThrowClassCastExceptionInverse_put(){
+    @Test(expected = ClassCastException.class)
+    public void shouldFailThrowClassCastExceptionInverse_put() {
         TreeBidiMap map = new TreeBidiMap();
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         int[] array = new int[5];
-        try {
-            inverse.put(array, "new");
-        } catch(Exception e) {
-            assertTrue(e instanceof ClassCastException);
-            return;
-        }
-        fail();
+        inverse.put(array, "new");
     }
 
     /*
      * Test 2.135: Test put of one element with null key for inverseBididmap
      */
     @Test
-    public void shouldFailThrowNullPointerExceptionInverse_put(){
+    public void shouldFailThrowNullPointerExceptionInverse_put() {
         TreeBidiMap map = new TreeBidiMap();
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        OrderedBidiMap inverse = map.inverseBidiMap();
         try {
-        	inverse.put(null, "new");
-        } catch(Exception e) {
+            inverse.put(null, "new");
+        } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
             return;
         }
         fail();
     }
-    
+
     /*
      * Test 2.136: Test for toString() with map size = 0 for inverseBididmap
      */
     @Test
     public void shouldReturnEmptyBracesAsStringInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap();
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         assertEquals("{}", inverse.toString());
     }
 
@@ -1703,24 +1615,24 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnMapInBracesAsStringInverse() {
         TreeBidiMap nonEmptyMap = new TreeBidiMap(hMap);
-        OrderedBidiMap inverse =  nonEmptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = nonEmptyMap.inverseBidiMap();
         assertEquals("{aaa=1, bbb=2, ccc=3, ddd=4, eee=5, fff=6, ggg=7}", inverse.toString());
     }
-    
+
     /*
      * Test 2.138: Test values on empty input for inverseBididmap
      */
     @Test
     public void shouldReturnEmptyValuesInverse() {
         TreeBidiMap emptyMap = new TreeBidiMap(new HashedMap());
-        OrderedBidiMap inverse =  emptyMap.inverseBidiMap();
+        OrderedBidiMap inverse = emptyMap.inverseBidiMap();
         String[] expected = {};
         String[] result = new String[inverse.values().size()];
         int index = 0;
-        for(Object i : inverse.values()) {
+        for (Object i : inverse.values()) {
             result[index++] = (String) i;
         }
-        assertArrayEquals(expected,result);
+        assertArrayEquals(expected, result);
     }
 
     /*
@@ -1729,14 +1641,16 @@ public class TreeBidiMapTest {
     @Test
     public void shouldReturnOneElementValuesInverse() {
         TreeBidiMap map = new TreeBidiMap(new HashedMap());
-        map.put("bbb" , "aaa");
-        OrderedBidiMap inverse =  map.inverseBidiMap();
+        map.put("bbb", "aaa");
+        OrderedBidiMap inverse = map.inverseBidiMap();
         String[] expected = {"bbb"};
         String[] result = new String[inverse.values().size()];
         int index = 0;
-        for(Object i : inverse.values()) {
+        for (Object i : inverse.values()) {
             result[index++] = (String) i;
         }
-        assertArrayEquals(expected,result);
+        assertArrayEquals(expected, result);
     }
+
+
 }
