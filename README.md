@@ -1,4 +1,4 @@
-# ECSE 429 - Term Project - Group 10 - Acceptance Testing
+# ECSE 429 - Term Project - Group 10 - Acceptance and Unit Testing
 
 ## Members
 
